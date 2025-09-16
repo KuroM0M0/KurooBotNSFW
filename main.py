@@ -38,7 +38,16 @@ async def on_ready():
     #zeigt in Konsole an, auf welchen Servern der Bot ist
     for guild in bot.guilds:
         print(f'- {guild.name} (ID: {guild.id}) | {len(guild.members)} Mitglieder')
-    bot.loop.create_task(setBotActivity())
+    await setBotActivity()
+
+
+@bot.event
+async def on_guild_join(guild):
+    await setBotActivity()
+
+@bot.event
+async def on_guild_remove(guild):
+    await setBotActivity()
 
 
 
