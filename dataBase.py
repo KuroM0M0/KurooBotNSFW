@@ -724,8 +724,8 @@ def insertUserSetting(connection, userID):
         cursor = connection.cursor()
         try:
             cursor.execute('''  INSERT INTO Settings
-                                (UserID, SparkDM, HugPatPing, HugPatDM, StatsPrivate)
-                                VALUES(?, True, True, False, False)''',
+                                (UserID, SparkTyp, StreakPrivate, SparkDM, Ghostping, Newsletter)
+                                VALUES(?, "Soft", 0, 1, 1, 0)''',
                                 (userID,))
             connection.commit()
         except sqlite3.Error as e:
@@ -1866,7 +1866,7 @@ def getUserItems(connection, userID):
             result = cursor.fetchall()
             return result
         except sqlite3.Error as e:
-            print(f"Fehler beim selecten von Inventar: {e}")
+            print(f"Fehler beim selecten von UserItems: {e}")
     else:
         print("Keine Datenbankverbindung verführbar")
 
@@ -1885,7 +1885,7 @@ def getUserItemCount(connection, userID, itemID):
             result = cursor.fetchone()
             return result
         except sqlite3.Error as e:
-            print(f"Fehler beim selecten von Inventar: {e}")
+            print(f"Fehler beim selecten von ItemCount: {e}")
     
 
 
@@ -1902,7 +1902,7 @@ def getUserItemID(connection, userID):
             result = cursor.fetchall()
             return [row[0] for row in result]
         except sqlite3.Error as e:
-            print(f"Fehler beim selecten von Inventar: {e}")
+            print(f"Fehler beim selecten von ItemID im Inventar: {e}")
     else:
         print("Keine Datenbankverbindung verführbar")
 
@@ -1920,6 +1920,24 @@ def getItemIDByName(connection, name):
             result = cursor.fetchone()
             return result[0]
         except sqlite3.Error as e:
-            print(f"Fehler beim selecten von Inventar: {e}")
+            print(f"Fehler beim selecten von ItemID: {e}")
+    else:
+        print("Keine Datenbankverbindung verführbar")
+
+
+
+
+def checkUserSparktypeSetting(connection, userID):
+    if connection is not None:
+        cursor = connection.cursor()
+        try:
+            cursor.execute('''  SELECT SparkTyp
+                                FROM Settings
+                                WHERE UserID = ?''',
+                                (userID))
+            result = cursor.fetchone()
+            return result
+        except sqlite3.Error as e:
+            print(f"Fehler beim selecten von SparktypeSetting: {e}")
     else:
         print("Keine Datenbankverbindung verführbar")
