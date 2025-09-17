@@ -1934,7 +1934,7 @@ def checkUserSparktypeSetting(connection, userID):
             cursor.execute('''  SELECT SparkTyp
                                 FROM Settings
                                 WHERE UserID = ?''',
-                                (userID))
+                                (userID,))
             result = cursor.fetchone()
             return result
         except sqlite3.Error as e:
