@@ -34,13 +34,24 @@ locale_map = {
     Locale.british_english: "en"
 }
 
-def translate(locale: Locale, path: str):
+def translate(locale: Locale, path: str, **kwargs):
+    """
+    Translate a string using the given locale and path.
+
+    The path should be a dot-separated string of keys to look up in the
+    localization dictionary.
+
+    Any additional keyword arguments are passed to the format method of the
+    translated string.
+
+    If the locale is not found in the locale_map, English is used as a fallback.
+    """
     parts = path.split(".")
     lang = locale_map.get(locale, "en")  # fallback auf Englisch
     value = localizations[lang]
     for p in parts:
         value = value[p]
-    return value
+    return value.format(**kwargs)
 
 
 async def setBotActivity():
