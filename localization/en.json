@@ -21,7 +21,7 @@
             "description": ""
         },
         "spark": {
-            "title": "Sende einen Spark an ",
+            "title": "Send Spark to ",
             "description": "",
             "SparkSelect": {
                 "text": "Welcher Spark wirst du senden?"

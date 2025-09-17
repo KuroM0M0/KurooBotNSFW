@@ -1,66 +1,53 @@
 import discord
 import json
 from discord.ext import commands
-from discord import app_commands
+from discord import Interaction, Locale, app_commands
+from main import localizations, connection, KuroID, translate
+from commands.settings import CheckUserIsInSettings
+from dataBase import *
 
 with open("sparks.json", "r", encoding="utf8") as f:
     sparks_data = json.load(f)
-
-art_choices = [
-    app_commands.Choice(name="Soft", value="Soft"),
-    app_commands.Choice(name="Spicy", value="Spicy"),
-    app_commands.Choice(name="Explicit", value="Explicit")
-]
 
 class Spark(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
 
-    @app_commands.command(name="sparknsfw", description="Sende anonyme Sparks")
-    @app_commands.describe(art="Wähle die Art des Sparks")
-    @app_commands.choices(art=art_choices)
-    async def sparkNSFW(self, interaction: discord.Interaction, art: str):
-        await interaction.response.defer(ephemeral=True)
+    @app_commands.command(name="sparknsfw", description="Send anonymous Sparks")
+    async def sparkNSFW(self, interaction: discord.Interaction, user: discord.User):
+        #await interaction.response.defer(ephemeral=True)
+        userID = str(interaction.user.id)
+        targetID = str(user.id)
+        targetName = user.name
+        Language = interaction.locale
 
-        # Filter die JSON nach dem gewählten Typ
-        sparks_filtered_by_type = [
-            (spark_key, spark_entry)
-            for spark_key, spark_entry in sparks_data.items()
-            if spark_entry["Typ"] == art
-        ]
+        CheckUserIsInSettings(userID)
+        Sparktyp = checkUserSparktypeSetting(connection, interaction.user.id) #für später wichtig im Modal, um abzufragen welche Sparks angezeigt werden sollen
+        await interaction.response.send_modal(SparkModal(targetName, Language))
 
-        # Erstelle Optionen für das Dropdown
-        spark_options = [
-            discord.SelectOption(label=spark_entry["name"], value=spark_key)
-            for spark_key, spark_entry in sparks_filtered_by_type
-        ]
 
-        # Discord UI Select erstellen
-        class SparkSelect(discord.ui.Select):
-            def __init__(self):
-                super().__init__(
-                    placeholder="Wähle dein Spark",
-                    min_values=1,
-                    max_values=1,
-                    options=spark_options
-                )
 
-            async def callback(self, interaction: discord.Interaction):
-                selected_key = self.values[0]
-                selected_spark = sparks_data[selected_key]
-                await interaction.response.send_message(
-                    f"{selected_spark['name']} {selected_spark['text']}", ephemeral=True
-                )
 
-        view = discord.ui.View()
-        view.add_item(SparkSelect())
-        await interaction.followup.send(
-            "Wähle deinen Spark:", view=view, ephemeral=True
+class SparkModal(discord.ui.Modal):
+    sparks = discord.ui.Label(
+        text = "Test",
+        description = "Send anonym Sparks",
+        component = discord.ui.Select(
+            options=[
+                discord.SelectOption(label=key, value=key)
+                for key in sparks_data.keys()
+            ]
         )
+    )
 
+    def __init__(self, targetName: discord.User, locale: Locale):
+        super().__init__(title=translate(locale, "modals.spark.title") + f"{targetName}")
+        self.targetName = targetName
 
-
+    async def on_submit(self, interaction: discord.Interaction):
+        targetName = self.targetName
+        await interaction.response.send_message(f"Spark sent to {targetName}!", ephemeral=True)
 
 
 
