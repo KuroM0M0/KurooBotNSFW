@@ -724,7 +724,7 @@ def insertUserSetting(connection, userID):
         cursor = connection.cursor()
         try:
             cursor.execute('''  INSERT INTO Settings
-                                (UserID, SparkTyp, StreakPrivate, SparkDM, Ghostping, Newsletter)
+                                (UserID, SparkTyp, StreakPrivate, SparkDM, Ping, Newsletter)
                                 VALUES(?, "Soft", 0, 1, 1, 0)''',
                                 (userID,))
             connection.commit()
@@ -1137,11 +1137,11 @@ def setStatDisabled(connection, SparkID, an): #an = true/false
 
 
 
-def getGhostpingSetting(connection, userID):
+def getPingSetting(connection, userID):
     if connection is not None:
         cursor = connection.cursor()
         try:
-            cursor.execute('''  SELECT Ghostping
+            cursor.execute('''  SELECT Ping
                                 FROM Settings
                                 WHERE UserID = ?''',
                                 (userID,))
@@ -1150,24 +1150,24 @@ def getGhostpingSetting(connection, userID):
                 return True
             return result[0]
         except sqlite3.Error as e:
-            print(f"Fehler beim selecten von Ghostping: {e}")
+            print(f"Fehler beim selecten von Ping: {e}")
     else:
         print("Keine Datenbankverbindung verführbar")
 
 
 
 
-def setGhostpingSetting(connection, userID, an): #an = true/false
+def setPingSetting(connection, userID, an): #an = true/false
     if connection is not None:
         cursor = connection.cursor()
         try:
             cursor.execute('''  UPDATE Settings
-                                SET Ghostping = ?
+                                SET Ping = ?
                                 WHERE UserID = ?''',
                                 (an, userID))
             connection.commit()
         except sqlite3.Error as e:
-            print(f"Fehler beim setzen der Ghostping Setting: {e}")
+            print(f"Fehler beim setzen der Ping Setting: {e}")
     else:
         print("Keine Datenbankverbindung verführbar")
 
