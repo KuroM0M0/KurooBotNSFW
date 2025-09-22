@@ -14,9 +14,8 @@ class Spark(commands.Cog):
         self.bot = bot
 
 
-    @app_commands.command(name="sparknsfw", description="Send anonymous Sparks")
+    @app_commands.command(name="sparknsfw", description="Send anonymous Sparks") #kann nicht dynamisch gesetzt werden
     async def sparkNSFW(self, interaction: discord.Interaction, user: discord.User):
-        #await interaction.response.defer(ephemeral=True)
         userID = str(interaction.user.id)
         targetID = str(user.id)
         targetName = user.name
@@ -47,7 +46,7 @@ class SparkModal(discord.ui.Modal):
 
     async def on_submit(self, interaction: discord.Interaction):
         targetName = self.targetName
-        await interaction.response.send_message(f"Spark sent to {targetName}!", ephemeral=True)
+        await interaction.response.send_message(translate(interaction.locale, "modal.spark.onSubmit", targetName=targetName), ephemeral=True)
 
 
 

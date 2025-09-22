@@ -1,21 +1,32 @@
 {
-    "commands": {
+    "command": {
         "sparknsfw": {
             "name": "SparkNSFW",
             "description": "Sende einen anonymen Spark."
         },
         "settings": {
             "name": "Einstellungen",
-            "description": "Einstellungen"
+            "description": "Einstellungen",
+            "sparks": "Wähle aus, welche Sparks du erhalten kannst.",
+            "format": {
+                "privacy": {
+                    "public": "Public 🌐",
+                    "private": "Private 🔒"
+                },
+                "toggle": {
+                    "on": "Active ✅",
+                    "off": "Deactive ❌"
+                }
+            }
         }
     },
-    "embeds": {
+    "embed": {
         "shop": {
             "name": "Shop",
             "description": "Öffne den Shop um dir Items zu kaufen."
         }
     },
-    "modals": {
+    "modal": {
         "settings": {
             "title": "Einstellungen",
             "description": ""

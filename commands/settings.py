@@ -2,7 +2,7 @@ from dataBase import *
 import discord
 from discord import ButtonStyle, ui
 from discord.ext import commands
-from main import connection, bot
+from main import connection, bot, localizations, translate
 
 #secondary, grey, gray = grau
 #primary, blurple = blau
@@ -12,32 +12,33 @@ from main import connection, bot
 #premium = sku_id benötigt
 
 class newSettings(discord.ui.View):
-    def __init__(self, premium: bool, userID: int):
+    def __init__(self, premium: bool, userID: int, locale: Locale):
         super().__init__(timeout=60)
         self.userID = userID
         self.premium = premium
+        self.locale = locale
 
         # Daten laden
         self.settingStuff(userID)
 
     # ---- Format-Helfer ----
     @staticmethod
-    def format_privacy(val): 
-        return "Privat 🔒" if val == 1 else "Öffentlich 🌐"
+    def format_privacy(val, locale: Locale): 
+        return translate(locale, "embed.settings.format.privacy.private") if val == 1 else translate(locale, "embed.settings.format.privacy.public")
 
     @staticmethod
-    def format_toggle(val): 
-        return "Aktiv ✅" if val == 1 else "Deaktiv ❌"
+    def format_toggle(val, locale: Locale): 
+        return translate(locale, "embed.settings.format.toggle.on") if val == 1 else translate(locale, "embed.settings.format.toggle.off")
 
     # ---- Daten laden (normal) ----
     def settingStuff(self, userID):
-        self.streakPrivate = self.format_privacy(getStreakPrivate(connection, userID))
-        self.statsPrivate = self.format_privacy(getStatsPrivate(connection, userID))
-        self.profilPrivate = self.format_privacy(getProfilPrivateSetting(connection, userID))
-        self.newsletter = self.format_toggle(getNewsletter(connection, userID))
-        self.sparkDM = self.format_toggle(getSparkDM(connection, userID))
-        self.ghostPing = self.format_toggle(getGhostpingSetting(connection, userID))
-        self.customSpark = self.format_toggle(getCustomSparkSetting(connection, userID))
+        self.streakPrivate = self.format_privacy(getStreakPrivate(connection, userID), locale=self.locale)
+        self.statsPrivate = self.format_privacy(getStatsPrivate(connection, userID), locale=self.locale)
+        self.profilPrivate = self.format_privacy(getProfilPrivateSetting(connection, userID), locale=self.locale)
+        self.newsletter = self.format_toggle(getNewsletter(connection, userID), locale=self.locale)
+        self.sparkDM = self.format_toggle(getSparkDM(connection, userID), locale=self.locale)
+        self.Ping = self.format_toggle(getPingSetting(connection, userID), locale=self.locale)
+        self.customSpark = self.format_toggle(getCustomSparkSetting(connection, userID), locale=self.locale)
 
     def settingEmbed(self):
         embed = discord.Embed(title="Einstellungen", color=0x005b96)
@@ -72,7 +73,7 @@ class newSettings(discord.ui.View):
         embed.add_field(
             name="🔒 Privatsphären Einstellungen",
             value=f">>> `Streak` → {self.streakPrivate}\n"
-                f"`Profil` → {self.profilPrivate}\n"
+                f"`{translate(self.locale, 'embed.settings.privacy.profil')}` → {self.profilPrivate}\n"
                 f"`Stats` → {self.statsPrivate}",
             inline=False
         )
@@ -118,6 +119,7 @@ class SettingSelect(discord.ui.Select):
     async def callback(self, interaction: discord.Interaction):
         userID = str(interaction.user.id)
         value = self.values[0]  # der ausgewählte Wert
+        locale = interaction.locale
 
         # ----- Umschalt-Logik -----
         if value == "streak":
@@ -149,7 +151,7 @@ class SettingSelect(discord.ui.Select):
             setCustomSparkSetting(connection, userID, not val)
 
         # ----- Embed neu aufbauen -----
-        settingsObj = newSettings(self.hatPremium, userID)
+        settingsObj = newSettings(self.hatPremium, userID, locale)
         await interaction.response.edit_message(embed=settingsObj.getEmbed(), view=self.view)
 
 
@@ -165,13 +167,14 @@ class Settings(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @bot.tree.command(name="settings", description="Stelle zB. SparkDMs ein/aus")
-    async def settings(interaction: discord.Interaction):
+    @app_commands.command(name="settings", description="Change your Settings (like which sparks you can get)")
+    async def settings(self, interaction: discord.Interaction):
         await interaction.response.defer(ephemeral=True)
         userID = str(interaction.user.id)
         premium = getPremium(connection, userID)
+        locale = interaction.locale
 
-        settingsObj = newSettings(premium, userID)
+        settingsObj = newSettings(premium, userID, locale)
         view = SettingsView(premium, userID)
         embed = settingsObj.getEmbed()
         await interaction.followup.send(embed=embed, view=view, ephemeral=True)

@@ -1,30 +1,45 @@
 {
-    "commands": {
+    "command": {
         "sparknsfw": {
             "name": "SparkNSFW",
             "description": "Sende einen anonymen Spark."
         },
         "settings": {
             "name": "Einstellungen",
-            "description": "Einstellungen"
+            "description": "Einstellungen",
+            "sparks": "Wähle aus, welche Sparks du erhalten kannst."
         }
     },
-    "embeds": {
+    "embed": {
         "shop": {
             "name": "Shop",
             "description": "Öffne den Shop um dir Items zu kaufen."
+        },
+        "settings": {
+            "privacy": {
+                "_label": "🔒 Privatsphären Einstellungeneeee",
+                "profil": "Profil"
+            },
+            "format": {
+                "privacy": {
+                    "public": "Öffentlich 🌐",
+                    "private": "Privat 🔒"
+                },
+                "toggle": {
+                    "on": "Aktiv ✅",
+                    "off": "Deaktiv ❌"
+                }
+            }
         }
     },
-    "modals": {
-        "settings": {
-            "title": "Einstellungen",
-            "description": ""
-        },
+    "modal": {
         "spark": {
-            "title": "Sende einen Spark an ",
-            "description": "",
-            "SparkSelect": {
-                "text": "Welcher Spark wirst du senden?"
+            "title": "Sende einen Spark an {targetName}",
+            "description": "Test",
+            "onSubmit": "Der Spark wurde erfolgreich an {targetName} gesendet!",
+            "sparkSelect": {
+                "text": "Welcher Spark wirst du senden?",
+                "description": "Test"
             }
         }
     }
