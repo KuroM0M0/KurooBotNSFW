@@ -51,7 +51,18 @@ def translate(locale: Locale, path: str, **kwargs):
     value = localizations[lang]
     for p in parts:
         value = value[p]
-    return value.format(**kwargs)
+
+    if isinstance(value, dict):
+        if "_label" in value:
+            value = value["_label"]
+        else:
+            raise KeyError(f"Key '{path}' verweist auf ein Objekt ohne _label")
+
+    # falls String → format anwenden
+    if isinstance(value, str):
+        return value.format(**kwargs)
+    
+    return str(value)
 
 
 async def setBotActivity():
