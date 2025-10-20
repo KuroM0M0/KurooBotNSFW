@@ -7,7 +7,9 @@ from commands.settings import CheckUserIsInSettings
 from dataBase import *
 
 with open("sparks.json", "r", encoding="utf8") as f:
-    sparks_data = json.load(f)
+    sparksData = json.load(f)
+    softSparks = {key: value for key, value in sparksData.items() if value.get("Typ") == "Soft"}
+    spicySparks = {key: value for key, value in sparksData.items() if value.get("Typ") == "Spicy"}
 
 class Spark(commands.Cog):
     def __init__(self, bot):
@@ -22,27 +24,57 @@ class Spark(commands.Cog):
         Language = interaction.locale
 
         CheckUserIsInSettings(userID)
-        Sparktyp = checkUserSparktypeSetting(connection, interaction.user.id) #für später wichtig im Modal, um abzufragen welche Sparks angezeigt werden sollen
-        await interaction.response.send_modal(SparkModal(targetName, Language))
+        CheckUserIsInSettings(targetID)
+        Sparktyp = getUserSparktypeSetting(connection, userID) #für später wichtig im Modal, um abzufragen welche Sparks angezeigt werden sollen
+        await interaction.response.send_modal(SparkModal(targetName, Language, Sparktyp))
 
 
 
 
 class SparkModal(discord.ui.Modal):
-    sparks = discord.ui.Label(
-        text = "Test",
-        description = "Send anonym Sparks",
-        component = discord.ui.Select(
-            options=[
-                discord.SelectOption(label=key, value=key)
-                for key in sparks_data.keys()
-            ]
-        )
-    )
-
-    def __init__(self, targetName: discord.User, locale: Locale):
-        super().__init__(title=translate(locale, "modals.spark.title") + f"{targetName}")
+    def __init__(self, targetName: discord.User, locale: Locale, Sparktyp: str):
+        super().__init__(title=translate(locale, "modal.spark.title", targetName=targetName))
         self.targetName = targetName
+        self.Sparktyp = Sparktyp
+
+        
+        if Sparktyp == "Explicit":
+            sparks = discord.ui.Label(
+                text = translate(locale, "modal.spark.sparkSelect.text"),
+                description = translate(locale, "modal.spark.sparkSelect.description"),
+                component = discord.ui.Select(
+                    options=[
+                        discord.SelectOption(label=key, value=key)
+                        for key in sparksData.keys()
+                    ]
+                )
+            )
+            self.add_item(sparks)
+        elif Sparktyp == "Spicy":
+            sparks = discord.ui.Label(
+                text = translate(locale, "modal.spark.sparkSelect.text"),
+                description = translate(locale, "modal.spark.sparkSelect.description"),
+                component = discord.ui.Select(
+                    options=[
+                        discord.SelectOption(label=key, value=key)
+                        for key in spicySparks.keys()
+                    ]
+                )
+            )
+            self.add_item(sparks)
+        else:
+            sparks = discord.ui.Label(
+                text = translate(locale, "modal.spark.sparkSelect.text"),
+                description = translate(locale, "modal.spark.sparkSelect.description"),
+                component = discord.ui.Select(
+                    options=[
+                        discord.SelectOption(label=key, value=key)
+                        for key in softSparks.keys()
+                    ]
+                )
+            )
+            self.add_item(sparks)
+
 
     async def on_submit(self, interaction: discord.Interaction):
         targetName = self.targetName
