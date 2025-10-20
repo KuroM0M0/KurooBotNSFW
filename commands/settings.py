@@ -1,6 +1,6 @@
 from dataBase import *
 import discord
-from discord import ButtonStyle, ui
+from discord import ButtonStyle, ui, Locale, app_commands
 from discord.ext import commands
 from main import connection, bot, localizations, translate
 
@@ -39,6 +39,7 @@ class newSettings(discord.ui.View):
         self.sparkDM = self.format_toggle(getSparkDM(connection, userID), locale=self.locale)
         self.Ping = self.format_toggle(getPingSetting(connection, userID), locale=self.locale)
         self.customSpark = self.format_toggle(getCustomSparkSetting(connection, userID), locale=self.locale)
+        self.sparkIntensity = getUserSparktypeSetting(connection, userID) #TODO Hier vllt noch Übersetzung einbauen
 
     def settingEmbed(self):
         embed = discord.Embed(title="Einstellungen", color=0x005b96)
@@ -51,8 +52,9 @@ class newSettings(discord.ui.View):
         )
 
         embed.add_field(
-            name="⚙️ Allgemeine Einstellungen",
-            value=f">>> `Ping` → {self.Ping}",
+            name=f"{translate(self.locale, 'embed.settings.general._label')}",
+            value=f">>> `Ping` → {self.Ping}\n"
+                  f"`Spark Intensität` → {self.sparkIntensity}",
             inline=False
         )
 
@@ -78,7 +80,7 @@ class newSettings(discord.ui.View):
             inline=False
         )
         embed.add_field(
-            name="⚙️ Allgemeine Einstellungen",
+            name=f"{translate(self.locale, 'embed.settings.general._label')}",
             value=f">>> `Ping` → {self.Ping}\n"
                 f"`Newsletter` → {self.newsletter}\n"
                 f"`SparkDM` → {self.sparkDM}\n"
@@ -112,6 +114,7 @@ class SettingSelect(discord.ui.Select):
             options.append(discord.SelectOption(label="Custom Sparks", description="Stelle ein, ob du Custom Sparks erhalten möchtest", value="customsparks", emoji="✨"))
         else: #Damit bei Premium alles in richtiger Reihenfolge angezeigt wird
             options.append(discord.SelectOption(label="Ping", description="Stelle ein, ob du Pings erhalten möchtest", value="Ping", emoji="<:PeepoPing:1412450415986872461>"))
+            options.append(discord.SelectOption(label="Spark Intensität", description="Stelle ein was für Sparks du erhalten möchtest.", value="sparkintensity", emoji="🔞"))
             
         super().__init__(placeholder="Einstellungen ändern", min_values=1, max_values=1, options=options)
 
@@ -150,6 +153,9 @@ class SettingSelect(discord.ui.Select):
             val = getCustomSparkSetting(connection, userID)
             setCustomSparkSetting(connection, userID, not val)
 
+        elif value == "sparkintensity":
+            await interaction.response.send_modal(SparkIntensityModal(locale))
+
         # ----- Embed neu aufbauen -----
         settingsObj = newSettings(self.hatPremium, userID, locale)
         await interaction.response.edit_message(embed=settingsObj.getEmbed(), view=self.view)
@@ -178,6 +184,37 @@ class Settings(commands.Cog):
         view = SettingsView(premium, userID)
         embed = settingsObj.getEmbed()
         await interaction.followup.send(embed=embed, view=view, ephemeral=True)
+
+
+
+def CheckUserIsInSettings(userID):
+    if checkUserSetting(connection, userID) is None:
+        insertUserSetting(connection, userID)
+    return True
+
+
+
+class SparkIntensityModal(discord.ui.Modal):
+    def __init__(self, locale: Locale):
+        self.locale = locale
+        super().__init__(title=translate(locale, "modal.sparkIntensity.title"))
+
+        Einstellung = discord.ui.Label(
+            text = translate(locale, "modal.sparkIntensity.text"),
+            description = translate(locale, "modal.sparkIntensity.description"),
+            component = discord.ui.Select(
+                options=[
+                    discord.SelectOption(label="Soft", description=translate(locale, "modal.sparkIntensity.options.softDesc"), value="Soft", emoji="🔞"),
+                    discord.SelectOption(label="Spicy", description=translate(locale, "modal.sparkIntensity.options.spicyDesc"), value="Spicy", emoji="🔞"),
+                    discord.SelectOption(label="Explicit", description=translate(locale, "modal.sparkIntensity.options.explicitDesc"), value="Explicit", emoji="🔞")
+            ]))
+        self.add_item(Einstellung)
+
+    async def on_submit(self, interaction: discord.Interaction):
+        await interaction.response.defer()
+        await interaction.followup.send("Testmodal erfolg")
+
+
 
 
 
