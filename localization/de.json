@@ -17,8 +17,14 @@
         },
         "settings": {
             "privacy": {
-                "_label": "🔒 Privatsphären Einstellungeneeee",
+                "_label": "🔒 Privatsphären Einstellungen",
                 "profil": "Profil"
+            },
+            "premium": {
+                "_label": "💎 Premium Einstellungen"
+            },
+            "general": {
+                "_label": "⚙️ Allgemeine Einstellungen"
             },
             "format": {
                 "privacy": {
@@ -40,6 +46,16 @@
             "sparkSelect": {
                 "text": "Welcher Spark wirst du senden?",
                 "description": "Test"
+            }
+        },
+        "sparkIntensity": {
+            "title": "Welche Sparks möchtest du erhalten können?",
+            "text": "text Test",
+            "description": "beschreibungs Test",
+            "options": {
+                "softDesc": "Bewunderung, Fantasy, Smile, Blush",
+                "spicyDesc": "Sexy, Tease, Lippen, Wink, Shy Flirt + alles was Soft ist",
+                "explicitDesc": "Jeder darf dir alle Sparks schicken."
             }
         }
     }

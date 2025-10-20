@@ -35,16 +35,16 @@ locale_map = {
 }
 
 def translate(locale: Locale, path: str, **kwargs):
+
     """
-    Translate a string using the given locale and path.
+    Übersetzt den Text anhand der übergebenen path aus den Lokalisierungsdateien.
 
-    The path should be a dot-separated string of keys to look up in the
-    localization dictionary.
-
-    Any additional keyword arguments are passed to the format method of the
-    translated string.
-
-    If the locale is not found in the locale_map, English is used as a fallback.
+    Falls der Wert ein String ist, wird dieser mit den übergebenen kwargs formatiert.
+    Falls der Wert ein Dict ist, wird nach dem Schlüssel "_label" gesucht und dieser Wert
+    zurückgegeben. 
+    
+    Wenn der Schlüssel nicht vorhanden ist, wird ein KeyError ausgelöst.
+    Falls der Wert kein String oder Dict ist, wird er einfach als String zurückgegeben.
     """
     parts = path.split(".")
     lang = locale_map.get(locale, "en")  # fallback auf Englisch

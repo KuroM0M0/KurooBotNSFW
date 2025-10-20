@@ -1927,7 +1927,7 @@ def getItemIDByName(connection, name):
 
 
 
-def checkUserSparktypeSetting(connection, userID):
+def getUserSparktypeSetting(connection, userID):
     if connection is not None:
         cursor = connection.cursor()
         try:
@@ -1936,7 +1936,7 @@ def checkUserSparktypeSetting(connection, userID):
                                 WHERE UserID = ?''',
                                 (userID,))
             result = cursor.fetchone()
-            return result
+            return result[0]
         except sqlite3.Error as e:
             print(f"Fehler beim selecten von SparktypeSetting: {e}")
     else:

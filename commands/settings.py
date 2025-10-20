@@ -44,7 +44,7 @@ class newSettings(discord.ui.View):
         embed = discord.Embed(title="Einstellungen", color=0x005b96)
 
         embed.add_field(
-            name="🔒 Privatsphären Einstellungen",
+            name=f"{translate(self.locale, 'embed.settings.privacy._label')}",
             value=f">>> `Streak` → {self.streakPrivate}\n"
                   f"`Profil` → {self.profilPrivate}",
             inline=False
@@ -57,7 +57,7 @@ class newSettings(discord.ui.View):
         )
 
         embed.add_field(
-            name="💎 Premium Einstellungen",
+            name=f"{translate(self.locale, 'embed.settings.premium._label')}",
             value=f">>> `Newsletter` → {self.newsletter}\n"
                   f"`SparkDM` → {self.sparkDM}\n"
                   f"`Stats` → {self.statsPrivate}\n"
@@ -71,7 +71,7 @@ class newSettings(discord.ui.View):
     def settingEmbedPremium(self):
         embed = discord.Embed(title="Einstellungen", color=0x005b96)
         embed.add_field(
-            name="🔒 Privatsphären Einstellungen",
+            name=f"{translate(self.locale, 'embed.settings.privacy._label')}",
             value=f">>> `Streak` → {self.streakPrivate}\n"
                 f"`{translate(self.locale, 'embed.settings.privacy.profil')}` → {self.profilPrivate}\n"
                 f"`Stats` → {self.statsPrivate}",
