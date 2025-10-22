@@ -93,6 +93,8 @@ async def on_ready():
 @bot.event
 async def on_guild_join(guild):
     await setBotActivity()
+    systemChannel = guild.system_channel
+    await systemChannel.send("use -setNSFWChannel to make the bot work in this channel")
 
 @bot.event
 async def on_guild_remove(guild):
