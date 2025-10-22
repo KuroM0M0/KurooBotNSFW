@@ -2,7 +2,8 @@
     "command": {
         "sparknsfw": {
             "name": "SparkNSFW",
-            "description": "Sende einen anonymen Spark."
+            "description": "Sende einen anonymen Spark.",
+            "error": "Du kannst in diesem Channel keine Sparks verschicken!"
         },
         "settings": {
             "name": "Einstellungen",
@@ -44,7 +45,7 @@
             "description": "Test",
             "onSubmit": "Der Spark wurde erfolgreich an {targetName} gesendet!",
             "sparkSelect": {
-                "text": "Welcher Spark wirst du senden?",
+                "text": "Welchen Spark wirst du senden?",
                 "description": "Test"
             }
         },
