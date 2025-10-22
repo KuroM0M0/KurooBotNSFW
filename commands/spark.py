@@ -9,7 +9,7 @@ from dataBase import *
 with open("sparks.json", "r", encoding="utf8") as f:
     sparksData = json.load(f)
     softSparks = {key: value for key, value in sparksData.items() if value.get("Typ") == "Soft"}
-    spicySparks = {key: value for key, value in sparksData.items() if value.get("Typ") == "Spicy"}
+    spicySparks = softSparks | {key: value for key, value in sparksData.items() if value.get("Typ") == "Spicy"}
 
 class Spark(commands.Cog):
     def __init__(self, bot):
@@ -25,7 +25,7 @@ class Spark(commands.Cog):
 
         CheckUserIsInSettings(userID)
         CheckUserIsInSettings(targetID)
-        Sparktyp = getSparkIntensity(connection, userID) #für später wichtig im Modal, um abzufragen welche Sparks angezeigt werden sollen
+        Sparktyp = getSparkIntensity(connection, targetID) #für später wichtig im Modal, um abzufragen welche Sparks angezeigt werden sollen
         await interaction.response.send_modal(SparkModal(targetName, Language, Sparktyp))
 
 
