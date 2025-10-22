@@ -17,7 +17,7 @@ Kurocord = os.getenv("Kurocord")
 intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
-bot = commands.Bot(command_prefix="nsfw!", intents=intents)
+bot = commands.Bot(command_prefix="-", intents=intents)
 connection = createConnection()
 
 
@@ -104,6 +104,7 @@ async def loadCommands():
     await bot.load_extension("commands.settings")
     await bot.load_extension("commands.spark")
     await bot.load_extension("commands.Test")
+    await bot.load_extension("commands.adminCommands")
 
 
 
