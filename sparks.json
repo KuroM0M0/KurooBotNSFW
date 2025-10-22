@@ -1,6 +1,6 @@
 {
     "Blush ☺️": {
-        "text": ", jemand traut sich kaum, dich anzusprechen… aus Angst, rot zu werden 🫣",
+        
         "link": [
         "https://cdn.discordapp.com/attachments/1354078227903283251/1354079747403022416/Blush.gif",
         "https://cdn.discordapp.com/attachments/1354078227903283251/1399345148957036595/Blush5.gif",
@@ -13,11 +13,9 @@
         "https://cdn.discordapp.com/attachments/1354078227903283251/1430541386670931968/Blush8.gif",
         "https://cdn.discordapp.com/attachments/1354078227903283251/1430541387039903817/MaleBlush1.gif"
         ],
-        "name": "Blush <:hugeblush:1393155240571699220>",
         "Typ": "Soft"
     },
     "Smile 😊": {
-        "text": ", jemand lächelt jedes Mal innerlich, wenn er dich sieht 🌸",
         "link": [
             "https://cdn.discordapp.com/attachments/1399391478308012112/1430540971241902121/MaleSmile1.gif",
             "https://cdn.discordapp.com/attachments/1399391478308012112/1430540971631841371/MaleSmile2.gif",
@@ -25,11 +23,9 @@
             "https://cdn.discordapp.com/attachments/1399391478308012112/1430540972328091659/Smile2.gif",
             "https://cdn.discordapp.com/attachments/1399391478308012112/1430540972835471442/Smile3.gif"
         ],
-        "name": "Smile <:cute_sun_glasses:1393156700084899943>",
         "Typ": "Soft"
     },
     "Fantasy 💭": {
-        "text": ", jemand fantasiert über dich… ohne dir jemals etwas zu sagen 💭",
         "link": [
             "https://cdn.discordapp.com/attachments/1399391478308012112/1430540799900385411/Fantasy1.gif",
             "https://cdn.discordapp.com/attachments/1399391478308012112/1430540800290197554/Fantasy2.gif",
@@ -37,35 +33,28 @@
             "https://cdn.discordapp.com/attachments/1399391478308012112/1430540801007423488/MaleFantasy2.gif",
             "https://cdn.discordapp.com/attachments/1399391478308012112/1430540801360007178/MaleFantasy3.gif"
         ],
-        "name": "Fantasy 💭",
         "Typ": "Soft"
     },
     "Bewunderung 🌹": {
-        "text": ", jemand findet dich umwerfend, aber traut sich nur, aus der Ferne zu schwärmen 🌹",
         "link": [
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1354079749017960519/Cute.gif?ex=67e3fc89&is=67e2ab09&hm=0af7b418f55f44d9314cb3c4482d9668b995e4bd9c1edfa0fa6dff49eea6bfca&",
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1399349342275506236/Cute6.gif?ex=6888ad21&is=68875ba1&hm=56d3e1b7fae4babff42cde007e5ad139eb9181497bc21afd8941105a6cbf55a6&",
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1399349342573170739/Cute2.gif?ex=6888ad21&is=68875ba1&hm=917418c80384a9d3ec440f6d10bb02fc2f1ea649bbc44339a17a90fd890306aa&",
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1399349343005446308/Cute3.gif?ex=6888ad22&is=68875ba2&hm=0663851f96b01ea09c6ad7e7df6c9445f4766840bf8675741486057a86e9a938&",
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1399349343378608178/Cute4.gif?ex=6888ad22&is=68875ba2&hm=e3071831d8acd68b9f8b81e75ae36a3d5bcc2db8c34e2cfc20d2c6bb1807ce8c&",
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1399349343730794506/Cute5.gif?ex=6888ad22&is=68875ba2&hm=a236a7842ee657e007a02ad04d9595104afacb0334eee7e8a207b04ca58677f5&"
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430540642723037326/MaleBewunderung1.gif?ex=68fa264b&is=68f8d4cb&hm=e0395315281fd544525be5a5017c35377d976092619e713ff74c1399568844e9&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430540643222163486/Bewunderung1.gif?ex=68fa264b&is=68f8d4cb&hm=785e199d38c4bfa665b4923c0abd6eb8e1753214f3f961d256bb86737d4f6302&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430540643830075412/Bewunderung2.gif?ex=68fa264b&is=68f8d4cb&hm=ae13888b08c4086391cb713b5e71c2ea7d0f273e106dae39c93dd8c750b26ea0&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430540644362747934/Bewunderung3.gif?ex=68fa264b&is=68f8d4cb&hm=81eeb7118d57b062426f57be0fbea8c556bf0e0edc271c95b97b359c5f61873e&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430540644820062251/Bewunderung4.gif?ex=68fa264b&is=68f8d4cb&hm=1b171277250d304a02c6b525c233b17883b6c645952da6cba0440e224b3a2a77&"
         ],
-        "name": "Bewunderung <:cute_emote:1309619079077691514>",
         "Typ": "Soft"
     },
     "Sexy 💃": {
-        "text": ", jemand findet dich heute einfach verboten sexy 🫦",
         "link": [
             "https://cdn.discordapp.com/attachments/1354078227903283251/1354079749592449125/Date.gif?ex=67e3fc89&is=67e2ab09&hm=c7e6cdeda1b08616af880ea3acb4df568d89c6f5ede0aeeedb8172cba5ec041a&",
             "https://cdn.discordapp.com/attachments/1354078227903283251/1399349560115200091/Date4.gif?ex=6888ad55&is=68875bd5&hm=e318ecb321dea97cc529934040dc758f0d0575741076c3993b3aed92040f6789&",
             "https://cdn.discordapp.com/attachments/1354078227903283251/1399349560505274448/Date2.gif?ex=6888ad55&is=68875bd5&hm=15742232744ec446037e7e4d3612e17bcf344b3e8931a1919edb1c6f3c57ec92&",
             "https://cdn.discordapp.com/attachments/1354078227903283251/1399349560840814714/Date3.gif?ex=6888ad55&is=68875bd5&hm=3607cecc2f0e77b9bf866f65c3f53d49288b458ed59646835ca749f51a5d7959&"
         ],
-        "name": "Date? <a:Touch_Some_Grass:1393159971495215124>",
         "Typ": "Spicy"
     },
     "Tease 😏": {
-        "text": ", jemand würde dich gern ein bisschen necken… und so 😏",
         "link": [
             "https://cdn.discordapp.com/attachments/1354078227903283251/1354079746886991913/Friends.gif?ex=67e3fc89&is=67e2ab09&hm=e9c1258cc4768943d6ae42e1ecbee9913f81ec7d3e12161901f472a1477f8592&",
             "https://cdn.discordapp.com/attachments/1354078227903283251/1399380318271569960/Friends6.gif?ex=6888c9fb&is=6887787b&hm=d592523b97506f5bb82570314978d9c9bcbd6a57b92d9bc3ad42ffa21d88ecd2&",
@@ -74,11 +63,9 @@
             "https://cdn.discordapp.com/attachments/1354078227903283251/1399380319463018556/Friends4.gif?ex=6888c9fb&is=6887787b&hm=92d9405d7ec980f9da84f4c47e85a286d31b9de1fecc1c42498d532081418f12&",
             "https://cdn.discordapp.com/attachments/1354078227903283251/1399380320100286555/Friends5.gif?ex=6888c9fb&is=6887787b&hm=66f0630c9c4890c3b6868014e941170cd4369e364393c65506cc14ea6a560a85&"
         ],
-        "name": "Tease 😏",
         "Typ": "Spicy"
     },
     "Lippen 👄": {
-        "text": "jemand denkt gerade an deine Lippen… und was sie alles tun könnten 👄",
         "link": [
             "https://cdn.discordapp.com/attachments/1354078227903283251/1354080383037079594/Green_Flag.gif?ex=67e3fd20&is=67e2aba0&hm=b4fa41320821337f956a6bf2e696a489890c0d814a2a6cdc93fa8d14fb234d85&",
             "https://cdn.discordapp.com/attachments/1354078227903283251/1399380695088107622/Green_Flag2.gif?ex=6888ca54&is=688778d4&hm=fc4115c6a731a845ae2476155578f10d56d020e2c0b433052007b31926d02c9e&",
@@ -86,66 +73,59 @@
             "https://cdn.discordapp.com/attachments/1354078227903283251/1399380695960518737/Green_Flag4.gif?ex=6888ca55&is=688778d5&hm=23ae1a8e535799316bd1b8d7a32888a08947b3e734dd4b4378f2b7223a63b313&",
             "https://cdn.discordapp.com/attachments/1354078227903283251/1399380696614699068/Green_Flag5.gif?ex=6888ca55&is=688778d5&hm=5e1dfcd9ad4cb3ad33dca3a81f476bd07ec67f3fe692d9a790000ea931b5e200&"
         ],
-        "name": "Lippen 👄",
         "Typ": "Spicy"
     },
     "Wink 😘": {
-        "text": ", jemand schickt dir gerade einen verführerischen Blick 😘",
         "link": [
             "https://cdn.discordapp.com/attachments/1354078227903283251/1354080383582601319/Hot.gif?ex=67e3fd21&is=67e2aba1&hm=aac27074ed8708f8a8d88e670aa04b00835601a238b3c0c321cc92efb4ab786d&",
             "https://cdn.discordapp.com/attachments/1354078227903283251/1399380848754692216/Hot4.gif?ex=6888ca79&is=688778f9&hm=c33d37b206afd9182d56f3736e4ec4c8e5297d09c0d2a6324e1cc305f14f5b9c&",
             "https://cdn.discordapp.com/attachments/1354078227903283251/1399380849224450180/Hot2.gif?ex=6888ca79&is=688778f9&hm=a3ff388acfc91eb875371c5fee02d6e9fe3ab639fa6225b09c37fa83d8331d0c&",
             "https://cdn.discordapp.com/attachments/1354078227903283251/1399380849715056671/Hot3.gif?ex=6888ca79&is=688778f9&hm=c7326f539ab7f4438d56b8082b7ff054c04165d0209b16da723c9067d75002b3&"
         ],
-        "name": "Hot :fire: <:POGGERS:1275782361459462256>",
         "Typ": "Spicy"
     },
     "Shy Flirt 🥰": {
-        "text": "jemand flirtet schüchtern mit dir… und hofft, dass du es bemerkst 🥰",
+        
         "link": [
             "https://cdn.discordapp.com/attachments/1354078227903283251/1354080384366674010/Love.gif?ex=67e3fd21&is=67e2aba1&hm=a3bc78a81afe0f0c48e4db726feea88fc412a84095cbbaeb623e39b4e6af0dbd&",
             "https://cdn.discordapp.com/attachments/1354078227903283251/1399380981567197315/Love4.giv.gif?ex=6888ca99&is=68877919&hm=bfad803c0e8bc8870dd9b3362f09b3c8b34cf485819a6472b2eede6eabee9642&",
             "https://cdn.discordapp.com/attachments/1354078227903283251/1399380982057926726/Love2.giv.gif?ex=6888ca99&is=68877919&hm=4e74db20f70ac235c46c2227f54a7a2e973c0f170d6b27292f926600c07725d1&",
             "https://cdn.discordapp.com/attachments/1354078227903283251/1399380982506721412/Love3.giv.gif?ex=6888ca99&is=68877919&hm=e7ce95834f97eadce8e3bad120e5a33547ae0cc97d4e6a9c67017382d4073e8c&"
         ],
-        "name": "Flirt",
+        
         "Typ": "Spicy"
     },
-    "bite-you": {
-        "text": ",  jemand würde dir jetzt zu gern in den Hals beißen 🧛🏼",
+    "bite 🧛": {
         "link": [
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1354080384882577460/Lustig.gif?ex=67e3fd21&is=67e2aba1&hm=064b0d34c44d7561ffda6a621422106e00b45a8e512c4cf8fe13725e1a3819ed&",
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1399381131417092318/Lustig8.gif?ex=6888cabc&is=6887793c&hm=36496438c5fca667a9fdde7ba42e48bf89679010311db1eaeb999b6e4323ab52&",
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1399381131924734066/Lustig2.gif?ex=6888cabd&is=6887793d&hm=507d87e44fc29b551158556186f3b185d17a68ddd4ab0e204fa732340231b029&",
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1399381133430358016/Lustig4.gif?ex=6888cabd&is=6887793d&hm=c056c3c469ccf5504d498b8ae50d56e9707fce24a44cc0e4150f3c401a7e299f&",
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1399381134038794281/Lustig5.gif?ex=6888cabd&is=6887793d&hm=b439b3c8bc08de1a429270e498f2ec933adb8651eeb324a85007959eaa01a1d4&",
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1399381134537658439/Lustig6.gif?ex=6888cabd&is=6887793d&hm=b04db8357f590f9e9ef08fefbb07b8324647f799540fa9a77d4752aef4ea1561&",
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1399381134860882090/Lustig7.gif?ex=6888cabd&is=6887793d&hm=39f7b1e4169752f1af01d276e55d2998e4a5a92f2b2aacd83ee090fe9e02782c&"
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430567531369725993/Bite.gif?ex=68fa3f56&is=68f8edd6&hm=b5945cc7fc59e469f53dde6d9ba5fadb1280c1908fcc2bc78e5ed334104caadb&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430567531986550814/Bite2.gif?ex=68fa3f56&is=68f8edd6&hm=24d3b8754a246b5df19f87bab2da74e41feb5a74b633d546f85c253680863fe4&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430567532447797428/Bite3.gif?ex=68fa3f56&is=68f8edd6&hm=a5da0119b2d1195edc5f5d7094e12778cb0157c67210ec3ccfc0422c58517509&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430567532817027103/Bite4.gif?ex=68fa3f56&is=68f8edd6&hm=a639c214d56a549513b99e3faacf03357c5317ef726664efedeceb9c6f58c35f&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430567533185863751/Bite5.gif?ex=68fa3f56&is=68f8edd6&hm=f348ca3ec08496256a23ed8c9221070c6ae9ec5a263e266de976b4a30f191a08&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430567533517344833/Bite6.gif?ex=68fa3f56&is=68f8edd6&hm=0417d69e908881496015a5e82720ca68145121f0f736729f03fbee59378e983b&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430567533831913523/Bite7.gif?ex=68fa3f56&is=68f8edd6&hm=e637ef532401710fb97ec56ca766202efaec2b963b73e83349a85843c56d7a8d&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430567534284767282/MaleBite1.gif?ex=68fa3f56&is=68f8edd6&hm=867c8a496f5d3001d0e641beb799f6c5258a7281bc970484fe2f34491b9d4fcf&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430567534758854737/MaleBite2.gif?ex=68fa3f56&is=68f8edd6&hm=44d47e63a207aca1bf573b25050b0fe6382bc13db366af99f6cbb53851605a7e&"
         ],
-        "name": "Lustig <:disgusting:1307039406263107694>",
         "Typ": "Explicit"
     },
-    "bite-me": {
-        "text": ", jemand möchte von dir gebissen werden 🧛🏼",
+    "bite-me 🧛": {
+        "text": ", jemand möchte von dir gebissen werden <:Bite:1430608155204784128>",
         "link": [
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1354080385344081991/Mutig.gif?ex=67e3fd21&is=67e2aba1&hm=5cf2b3dc0caaffd6b5bd30c61bb58109b864ce18fb1f3116195cbc58f02fbe34&",
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1399381330910904320/Mutig3.gif?ex=6888caec&is=6887796c&hm=462c70bce4b5b36086c03fc5be750becd2aa936c64f3fbff746cb238fa7c410b&",
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1399381331456032768/Mutig2.gif?ex=6888caec&is=6887796c&hm=eb2d704c9ab7620d7dd063ce7d905c5653a8a2d2ae9b5add3cbf4d39577fdac4&"
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430567531369725993/Bite.gif?ex=68fa3f56&is=68f8edd6&hm=b5945cc7fc59e469f53dde6d9ba5fadb1280c1908fcc2bc78e5ed334104caadb&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430567531986550814/Bite2.gif?ex=68fa3f56&is=68f8edd6&hm=24d3b8754a246b5df19f87bab2da74e41feb5a74b633d546f85c253680863fe4&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430567532447797428/Bite3.gif?ex=68fa3f56&is=68f8edd6&hm=a5da0119b2d1195edc5f5d7094e12778cb0157c67210ec3ccfc0422c58517509&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430567532817027103/Bite4.gif?ex=68fa3f56&is=68f8edd6&hm=a639c214d56a549513b99e3faacf03357c5317ef726664efedeceb9c6f58c35f&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430567533185863751/Bite5.gif?ex=68fa3f56&is=68f8edd6&hm=f348ca3ec08496256a23ed8c9221070c6ae9ec5a263e266de976b4a30f191a08&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430567533517344833/Bite6.gif?ex=68fa3f56&is=68f8edd6&hm=0417d69e908881496015a5e82720ca68145121f0f736729f03fbee59378e983b&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430567533831913523/Bite7.gif?ex=68fa3f56&is=68f8edd6&hm=e637ef532401710fb97ec56ca766202efaec2b963b73e83349a85843c56d7a8d&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430567534284767282/MaleBite1.gif?ex=68fa3f56&is=68f8edd6&hm=867c8a496f5d3001d0e641beb799f6c5258a7281bc970484fe2f34491b9d4fcf&",
+            "https://cdn.discordapp.com/attachments/1399391478308012112/1430567534758854737/MaleBite2.gif?ex=68fa3f56&is=68f8edd6&hm=44d47e63a207aca1bf573b25050b0fe6382bc13db366af99f6cbb53851605a7e&"
         ],
-        "name": "Mutig <:frog_omg:1393160978794807418>",
+        "name": "Bite <:Bite:1430608155204784128>",
         "Typ": "Explicit"
     },
-    "Nett 😇": {
-        "text": ", du hast wohl jemandem etwas Gutes getan, denn da findet dich jemand wirklich nett!",
-        "link": [
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1354080386002583584/Nett.gif?ex=67e3fd21&is=67e2aba1&hm=c7348544f8e959bb32a72d28bef64cc1704a68589df8f167f2bd7503f6a7b9ca&",
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1399381429783367762/Nett3.gif?ex=6888cb04&is=68877984&hm=09b21a8481a3482c37cefb0c9dd88dda3a645f0980fffc391dd7221274c0aa88&",
-            "https://cdn.discordapp.com/attachments/1354078227903283251/1399381430148005979/Nett2.gif?ex=6888cb04&is=68877984&hm=ddf66006948fa501d503647b1a74d473cad0699348ce18187535274116f5bd47&"
-        ],
-        "name": "Nett <:pepethumbsup:1179567349561569291>",
-        "Typ": "Explicit"
-    },
-    "spank-you": {
+    "spank": {
         "text": ", jemand würde dir gerade zu gern den Hintern versohlen 🍑",
         "link": [
             "https://cdn.discordapp.com/attachments/1354078227903283251/1354080747744399411/Respekt.gif?ex=67e3fd77&is=67e2abf7&hm=0b32fd7e2d609082d9857a83beccd9cb6f83ca4a46bf442f79c0ead55cd8fe8f&",
@@ -157,7 +137,7 @@
         "name": "Respekt! 🤝",
         "Typ": "Explicit"
     },
-    "spank-meu": {
+    "spank-me": {
         "text": ", jemand wünscht sich, dass du ihnen gerade den Hintern versohlst 🍑",
         "link": [
             "https://cdn.discordapp.com/attachments/1354078227903283251/1354080748361093240/Schuchtern.gif?ex=67e3fd78&is=67e2abf8&hm=6f07468a62a9ca82b09fbff699f693aafc1b86ce3e29abaff5617e5db8001d57&",
@@ -168,7 +148,7 @@
         "name": "Schüchtern <:anya_lurk:1393161478122770512>",
         "Typ": "Explicit"
     },
-    "choke-you": {
+    "choke": {
         "text": ", jemand denkt daran, dir sanft den Atem zu rauben… und das Herz schneller schlagen zu lassen 🖤",
         "link": [
             "https://cdn.discordapp.com/attachments/1354078227903283251/1354080749539692615/Stimme.gif?ex=67e3fd78&is=67e2abf8&hm=26389c7359e81ecd20946ae843e86b4b28b6132d3498f59d419aeab655340964&",

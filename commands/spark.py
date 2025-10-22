@@ -52,41 +52,48 @@ class SparkModal(discord.ui.Modal):
             self.select = discord.ui.Select(
                 options=[
                         discord.SelectOption(label=key, value=key)
-                        for key in sparksData.keys()
-                    ]
-            )
+                        for key in sparksData.keys()])
+            
             sparks = discord.ui.Label(
                 text = translate(locale, "modal.spark.sparkSelect.text"),
                 description = translate(locale, "modal.spark.sparkSelect.description"),
-                component = self.select
-            )
+                component = self.select)
             self.add_item(sparks)
+
         elif Sparktyp == "Spicy":
             self.select = discord.ui.Select(
                 options=[
                         discord.SelectOption(label=key, value=key)
-                        for key in spicySparks.keys()
-                    ]
-            )
+                        for key in spicySparks.keys()])
+            
             sparks = discord.ui.Label(
                 text = translate(locale, "modal.spark.sparkSelect.text"),
                 description = translate(locale, "modal.spark.sparkSelect.description"),
-                component = self.select
-            )
+                component = self.select)
             self.add_item(sparks)
+
         else:
             self.select = discord.ui.Select(
                 options=[
                         discord.SelectOption(label=key, value=key)
-                        for key in softSparks.keys()
-                    ]
-            )
+                        for key in softSparks.keys()])
+            
             sparks = discord.ui.Label(
                 text = translate(locale, "modal.spark.sparkSelect.text"),
                 description = translate(locale, "modal.spark.sparkSelect.description"),
-                component = self.select
-            )
+                component = self.select)
             self.add_item(sparks)
+
+        self.anonym = discord.ui.Select(
+            options=[
+                discord.SelectOption(label=translate(locale, "yes"), value="yes"),
+                discord.SelectOption(label=translate(locale, "no"), value="no")])
+        
+        anonym = discord.ui.Label(
+            text = translate(locale, "modal.spark.anonym.text"),
+            description = translate(locale, "modal.spark.anonym.description"),
+            component = self.anonym)
+        self.add_item(anonym)
 
 
     async def on_submit(self, interaction: discord.Interaction):
@@ -96,9 +103,13 @@ class SparkModal(discord.ui.Modal):
         UserExists(str(interaction.user.id))
         insertLogs(connection, datetime.now().isoformat(), interaction.user.id, self.target.id, serverID, kompliment, "Spark", 1)
 
+        if self.anonym.values[0] == "yes":
+            desc = translate(interaction.locale, f"sparks.{kompliment}.anonym")
+        else:
+            desc = translate(interaction.locale, f"sparks.{kompliment}.text", userName=interaction.user.name)
         embed = discord.Embed(
-        title=f"{sparksData[kompliment]['name']}",
-        description=f"{self.target.mention} {sparksData[kompliment]['text']}",
+        title=translate(interaction.locale, f"sparks.{kompliment}.name"),
+        description=f"{self.target.mention} {desc}",
         color=0x00FF00)
 
         embed.set_image(url=random.choice(sparksData[kompliment].get("link")))
