@@ -571,14 +571,14 @@ def resetPremium(connection, userID):
 
 
 
-def insertLogs(connection, Timestamp, UserID, UserName, TargetID, TargetName, Compliment, Typ, ServerID, ServerName, Reveal = False):
+def insertLogs(connection, Timestamp, UserID, TargetID, ServerID, Spark, Typ, Anonym):
     if connection is not None:
         cursor = connection.cursor()
         try:
             cursor.execute('''  INSERT INTO Logs
-                                (Timestamp, UserID, UserName, TargetID, TargetName, Compliment, Typ, ServerID, ServerName, Reveal)
-                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
-                                (Timestamp, UserID, UserName, TargetID, TargetName, Compliment, Typ, ServerID, ServerName, Reveal))
+                                (Timestamp, UserID, TargetID, ServerID, Spark, Typ, Anonym)
+                                VALUES (?, ?, ?, ?, ?, ?, ?)''',
+                                (Timestamp, UserID, TargetID, ServerID, Spark, Typ, Anonym))
             connection.commit()
         except sqlite3.Error as e:
             print(f"Fehler beim Insert von Logs: {e}")
@@ -652,8 +652,8 @@ def insertUser(connection, userID):
         cursor = connection.cursor()
         try:
             cursor.execute('''  INSERT INTO User
-                                (UserID, HugPatUses, SparkUses, HugPatLastReset, HugPatTimestamp, SparkTimestamp, Streak, StreakPoints, HatGevotet, HatPremium, PremiumTimestamp, VoteTimestamp, StreakPointsTimestamp, AktivsterUser, VotePunkte, Birthday, RevealUses)
-                                VALUES(?, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)''',
+                                (UserID, PremiumTimestamp, PremiumTimeInMonths, VotePoints, StreakPoints, Streak)
+                                VALUES(?, 0, 0, 0, 0, 0)''',
                                 (userID,))
             connection.commit()
             print("TestErfolg")
@@ -1508,8 +1508,8 @@ def insertServer(connection, ServerID):
         cursor = connection.cursor()
         try:
             cursor.execute('''  INSERT INTO Server
-                                (ServerID, ChannelSparkID, ChannelNewsletterID, AktivsterServer, Premium, PremiumTimestamp)
-                                VALUES (?, NULL, NULL, 0, 0, NULL)''',
+                                (ServerID, PremiumTimestamp, PremiumInMonths, ChannelSparkID)
+                                VALUES (?, 0, 0, 0)''',
                                 (ServerID,))
             connection.commit()
         except sqlite3.Error as e:
