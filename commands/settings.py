@@ -33,54 +33,53 @@ class newSettings(discord.ui.View):
     # ---- Daten laden (normal) ----
     def settingStuff(self, userID):
         self.streakPrivate = self.format_privacy(getStreakPrivate(connection, userID), locale=self.locale)
-        self.statsPrivate = self.format_privacy(getStatsPrivate(connection, userID), locale=self.locale)
-        self.profilPrivate = self.format_privacy(getProfilPrivateSetting(connection, userID), locale=self.locale)
+        #self.statsPrivate = self.format_privacy(getStatsPrivate(connection, userID), locale=self.locale)
+        #self.profilPrivate = self.format_privacy(getProfilPrivateSetting(connection, userID), locale=self.locale)
         self.newsletter = self.format_toggle(getNewsletter(connection, userID), locale=self.locale)
         self.sparkDM = self.format_toggle(getSparkDM(connection, userID), locale=self.locale)
         self.Ping = self.format_toggle(getPingSetting(connection, userID), locale=self.locale)
-        self.customSpark = self.format_toggle(getCustomSparkSetting(connection, userID), locale=self.locale)
-        self.sparkIntensity = getUserSparktypeSetting(connection, userID) #TODO Hier vllt noch Übersetzung einbauen
+        #self.customSpark = self.format_toggle(getCustomSparkSetting(connection, userID), locale=self.locale)
+        self.sparkIntensity = getSparkIntensity(connection, userID) #TODO Hier vllt noch Übersetzung einbauen
 
     def settingEmbed(self):
         embed = discord.Embed(title="Einstellungen", color=0x005b96)
 
         embed.add_field(
-            name=f"{translate(self.locale, 'embed.settings.privacy._label')}",
-            value=f">>> `Streak` → {self.streakPrivate}\n"
-                  f"`Profil` → {self.profilPrivate}",
+            name=f"{translate(self.locale, 'embed.settings.privacy')}",
+            value=f">>> `Streak` → {self.streakPrivate}\n",
+                  #f"`Profil` → {self.profilPrivate}",
             inline=False
         )
 
         embed.add_field(
-            name=f"{translate(self.locale, 'embed.settings.general._label')}",
+            name=f"{translate(self.locale, 'embed.settings.general')}",
             value=f">>> `Ping` → {self.Ping}\n"
                   f"`Spark Intensität` → {self.sparkIntensity}",
             inline=False
         )
 
         embed.add_field(
-            name=f"{translate(self.locale, 'embed.settings.premium._label')}",
+            name=f"{translate(self.locale, 'embed.settings.premium')}",
             value=f">>> `Newsletter` → {self.newsletter}\n"
-                  f"`SparkDM` → {self.sparkDM}\n"
-                  f"`Stats` → {self.statsPrivate}\n"
-                  f"`Custom Sparks` → {self.customSpark}",
+                  f"`SparkDM` → {self.sparkDM}\n",
+                  #f"`Stats` → {self.statsPrivate}\n"
+                  #f"`Custom Sparks` → {self.customSpark}",
             inline=False
         )
-
         return embed
 
     # Premium-Embed (Platzhalter)
     def settingEmbedPremium(self):
         embed = discord.Embed(title="Einstellungen", color=0x005b96)
         embed.add_field(
-            name=f"{translate(self.locale, 'embed.settings.privacy._label')}",
+            name=f"{translate(self.locale, 'embed.settings.privacy')}",
             value=f">>> `Streak` → {self.streakPrivate}\n"
                 f"`{translate(self.locale, 'embed.settings.privacy.profil')}` → {self.profilPrivate}\n"
                 f"`Stats` → {self.statsPrivate}",
             inline=False
         )
         embed.add_field(
-            name=f"{translate(self.locale, 'embed.settings.general._label')}",
+            name=f"{translate(self.locale, 'embed.settings.general')}",
             value=f">>> `Ping` → {self.Ping}\n"
                 f"`Newsletter` → {self.newsletter}\n"
                 f"`SparkDM` → {self.sparkDM}\n"
@@ -149,16 +148,16 @@ class SettingSelect(discord.ui.Select):
             val = getStatsPrivate(connection, userID)
             setStatsPrivate(connection, userID, not val)
 
-        elif value == "customsparks":
-            val = getCustomSparkSetting(connection, userID)
-            setCustomSparkSetting(connection, userID, not val)
+        #elif value == "customsparks":
+        #    val = getCustomSparkSetting(connection, userID)
+        #    setCustomSparkSetting(connection, userID, not val)
 
         elif value == "sparkintensity":
             await interaction.response.send_modal(SparkIntensityModal(locale))
 
         # ----- Embed neu aufbauen -----
         settingsObj = newSettings(self.hatPremium, userID, locale)
-        await interaction.response.edit_message(embed=settingsObj.getEmbed(), view=self.view)
+        await interaction.response.edit_message(embed=settingsObj.getEmbed(), view=self.view) #nach Modal auch aktualisieren
 
 
 
@@ -196,23 +195,37 @@ def CheckUserIsInSettings(userID):
 
 class SparkIntensityModal(discord.ui.Modal):
     def __init__(self, locale: Locale):
-        self.locale = locale
         super().__init__(title=translate(locale, "modal.sparkIntensity.title"))
+        self.locale = locale
+        
 
-        Einstellung = discord.ui.Label(
+        self.select = discord.ui.Select(
+            placeholder=translate(locale, "modal.sparkIntensity.text"),
+            options=[
+                discord.SelectOption(label="Soft", value="Soft", description=translate(locale, "modal.sparkIntensity.options.softDesc"), emoji="🔞"),
+                discord.SelectOption(label="Spicy", value="Spicy", description=translate(locale, "modal.sparkIntensity.options.spicyDesc"), emoji="🔞"),
+                discord.SelectOption(label="Explicit", value="Explicit", description=translate(locale, "modal.sparkIntensity.options.explicitDesc"), emoji="🔞"),
+            ])
+
+        self.Einstellung = discord.ui.Label(
             text = translate(locale, "modal.sparkIntensity.text"),
             description = translate(locale, "modal.sparkIntensity.description"),
-            component = discord.ui.Select(
-                options=[
-                    discord.SelectOption(label="Soft", description=translate(locale, "modal.sparkIntensity.options.softDesc"), value="Soft", emoji="🔞"),
-                    discord.SelectOption(label="Spicy", description=translate(locale, "modal.sparkIntensity.options.spicyDesc"), value="Spicy", emoji="🔞"),
-                    discord.SelectOption(label="Explicit", description=translate(locale, "modal.sparkIntensity.options.explicitDesc"), value="Explicit", emoji="🔞")
-            ]))
-        self.add_item(Einstellung)
+            component = self.select)
+        self.add_item(self.Einstellung)
 
     async def on_submit(self, interaction: discord.Interaction):
         await interaction.response.defer()
-        await interaction.followup.send("Testmodal erfolg")
+        userID = str(interaction.user.id)
+        locale = interaction.locale
+        option = self.select.values[0]
+        premium = getPremium(connection, userID)
+
+        setSparkIntensity(connection, str(userID), option)
+        settingsObj = newSettings(premium, userID, locale)
+        await interaction.edit_original_response(embed=settingsObj.getEmbed())
+
+    async def on_error(self, interaction: discord.Interaction, error: Exception):
+        await interaction.followup.send(translate(interaction.locale, "modal.sparkIntensity.error", error=error))
 
 
 

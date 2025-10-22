@@ -1927,7 +1927,7 @@ def getItemIDByName(connection, name):
 
 
 
-def getUserSparktypeSetting(connection, userID):
+def getSparkIntensity(connection, userID):
     if connection is not None:
         cursor = connection.cursor()
         try:
@@ -1939,5 +1939,22 @@ def getUserSparktypeSetting(connection, userID):
             return result[0]
         except sqlite3.Error as e:
             print(f"Fehler beim selecten von SparktypeSetting: {e}")
+    else:
+        print("Keine Datenbankverbindung verführbar")
+
+
+
+
+def setSparkIntensity(connection, userID, typ):
+    if connection is not None:
+        cursor = connection.cursor()
+        try:
+            cursor.execute('''  UPDATE Settings
+                                SET SparkTyp = ?
+                                WHERE UserID = ?''',
+                                (typ, userID))
+            connection.commit()
+        except sqlite3.Error as e:
+            print(f"Fehler beim setzen der SparktypeSetting: {e}")
     else:
         print("Keine Datenbankverbindung verführbar")

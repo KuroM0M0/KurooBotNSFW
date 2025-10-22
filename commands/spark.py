@@ -25,7 +25,7 @@ class Spark(commands.Cog):
 
         CheckUserIsInSettings(userID)
         CheckUserIsInSettings(targetID)
-        Sparktyp = getUserSparktypeSetting(connection, userID) #für später wichtig im Modal, um abzufragen welche Sparks angezeigt werden sollen
+        Sparktyp = getSparkIntensity(connection, userID) #für später wichtig im Modal, um abzufragen welche Sparks angezeigt werden sollen
         await interaction.response.send_modal(SparkModal(targetName, Language, Sparktyp))
 
 

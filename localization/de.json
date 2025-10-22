@@ -56,7 +56,8 @@
                 "softDesc": "Bewunderung, Fantasy, Smile, Blush",
                 "spicyDesc": "Sexy, Tease, Lippen, Wink, Shy Flirt + alles was Soft ist",
                 "explicitDesc": "Jeder darf dir alle Sparks schicken."
-            }
+            },
+            "error": "Fehler: {error}"
         }
     }
 }
