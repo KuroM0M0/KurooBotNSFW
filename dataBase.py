@@ -1459,6 +1459,8 @@ def getChannelSparkID(connection, serverID):
                                 WHERE ServerID = ?''',
                                 (serverID,))
             result = cursor.fetchone()
+            if result is None:
+                return 0
             return result[0]
         except sqlite3.Error as e:
             print(f"Fehler beim selecten von ChannelSparkID: {e}")
