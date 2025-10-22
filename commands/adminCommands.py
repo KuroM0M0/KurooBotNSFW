@@ -10,7 +10,7 @@ class AdminCommands(commands.Cog):
     async def setNSFWChannel(self, ctx):
         channel = ctx.channel
         serverID = ctx.guild.id
-        CheckServerExists(connection, serverID)
+        CheckServerExists(serverID)
         await ctx.send(f"{channel} ist nun der Spark Channel!")
         setChannelSparkID(connection, serverID, channel.id)
 

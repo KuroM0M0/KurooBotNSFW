@@ -2,7 +2,7 @@ from dataBase import *
 import discord
 from discord import ButtonStyle, ui, Locale, app_commands
 from discord.ext import commands
-from main import connection, bot, localizations, translate
+from main import connection, translate
 
 #secondary, grey, gray = grau
 #primary, blurple = blau
@@ -54,14 +54,14 @@ class newSettings(discord.ui.View):
         embed.add_field(
             name=f"{translate(self.locale, 'embed.settings.general')}",
             value=f">>> `Ping` → {self.Ping}\n"
+                  f"`SparkDM` → {self.sparkDM}\n"
                   f"`Spark Intensität` → {self.sparkIntensity}",
             inline=False
         )
 
         embed.add_field(
             name=f"{translate(self.locale, 'embed.settings.premium')}",
-            value=f">>> `Newsletter` → {self.newsletter}\n"
-                  f"`SparkDM` → {self.sparkDM}\n",
+            value=f">>> `Newsletter` → {self.newsletter}\n",
                   #f"`Stats` → {self.statsPrivate}\n"
                   #f"`Custom Sparks` → {self.customSpark}",
             inline=False
@@ -101,18 +101,19 @@ class SettingSelect(discord.ui.Select):
         self.userID = userID
         self.hatPremium = hatPremium
         options = [
-                discord.SelectOption(label="Streak", description="Stelle ein, ob deine Streak Privat oder Öffentlich angezeigt werden soll", value="streak", emoji="<:Streakpunkt:1406583255934963823>"),
-                discord.SelectOption(label="Profil", description="Stelle ein, ob dein Profil Privat oder Öffentlich angezeigt werden soll", value="profil", emoji="👤")
+                discord.SelectOption(label="Streak", description="Stelle ein, ob deine Streak Privat oder Öffentlich angezeigt werden soll", value="streak", emoji="<:Streakpunkt:1406583255934963823>")
+                #discord.SelectOption(label="Profil", description="Stelle ein, ob dein Profil Privat oder Öffentlich angezeigt werden soll", value="profil", emoji="👤")
             ]
         
         if hatPremium:
-            options.append(discord.SelectOption(label="Stats", description="Stelle ein, ob deine Stats Privat oder Öffentlich angezeigt werden sollen", value="stats", emoji="📊"))
+            #options.append(discord.SelectOption(label="Stats", description="Stelle ein, ob deine Stats Privat oder Öffentlich angezeigt werden sollen", value="stats", emoji="📊"))
             options.append(discord.SelectOption(label="Ping", description="Stelle ein, ob du Pings erhalten möchtest", value="Ping", emoji="<:PeepoPing:1412450415986872461>"))
             options.append(discord.SelectOption(label="Newsletter", description="Stelle ein, ob du Updates vom Bot in deine DMs erhalten möchtest", value="newsletter", emoji="📰"))
             options.append(discord.SelectOption(label="SparkDM", description="Stelle ein, ob du vom Bot angeschrieben werden willst, wenn du gesparkt wurdest", value="sparkdm", emoji="<:Schaufel:1410610904361472031>"))
-            options.append(discord.SelectOption(label="Custom Sparks", description="Stelle ein, ob du Custom Sparks erhalten möchtest", value="customsparks", emoji="✨"))
+            #options.append(discord.SelectOption(label="Custom Sparks", description="Stelle ein, ob du Custom Sparks erhalten möchtest", value="customsparks", emoji="✨"))
         else: #Damit bei Premium alles in richtiger Reihenfolge angezeigt wird
             options.append(discord.SelectOption(label="Ping", description="Stelle ein, ob du Pings erhalten möchtest", value="Ping", emoji="<:PeepoPing:1412450415986872461>"))
+            options.append(discord.SelectOption(label="SparkDM", description="Stelle ein, ob du vom Bot angeschrieben werden willst, wenn du gesparkt wurdest", value="sparkdm", emoji="<:Schaufel:1410610904361472031>"))
             options.append(discord.SelectOption(label="Spark Intensität", description="Stelle ein was für Sparks du erhalten möchtest.", value="sparkintensity", emoji="🔞"))
             
         super().__init__(placeholder="Einstellungen ändern", min_values=1, max_values=1, options=options)
