@@ -51,7 +51,7 @@ class SparkModal(discord.ui.Modal):
         if Sparktyp == "Explicit":
             self.select = discord.ui.Select(
                 options=[
-                        discord.SelectOption(label=key, value=key)
+                        discord.SelectOption(label=key, value=key, emoji=sparksData[key].get("Emote"))
                         for key in sparksData.keys()])
             
             sparks = discord.ui.Label(
@@ -63,7 +63,7 @@ class SparkModal(discord.ui.Modal):
         elif Sparktyp == "Spicy":
             self.select = discord.ui.Select(
                 options=[
-                        discord.SelectOption(label=key, value=key)
+                        discord.SelectOption(label=key, value=key, emoji=sparksData[key].get("Emote"))
                         for key in spicySparks.keys()])
             
             sparks = discord.ui.Label(
@@ -75,7 +75,7 @@ class SparkModal(discord.ui.Modal):
         else:
             self.select = discord.ui.Select(
                 options=[
-                        discord.SelectOption(label=key, value=key)
+                        discord.SelectOption(label=key, value=key, emoji=sparksData[key].get("Emote"))
                         for key in softSparks.keys()])
             
             sparks = discord.ui.Label(
@@ -106,7 +106,7 @@ class SparkModal(discord.ui.Modal):
         if self.anonym.values[0] == "yes":
             desc = translate(interaction.locale, f"sparks.{kompliment}.anonym")
         else:
-            desc = translate(interaction.locale, f"sparks.{kompliment}.text", userName=interaction.user.name)
+            desc = translate(interaction.locale, f"sparks.{kompliment}.text", userName=interaction.user.mention)
         embed = discord.Embed(
         title=translate(interaction.locale, f"sparks.{kompliment}.name"),
         description=f"{self.target.mention} {desc}",

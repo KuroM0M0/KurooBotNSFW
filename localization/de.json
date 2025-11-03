@@ -2,7 +2,7 @@
     "command": {
         "sparknsfw": {
             "name": "SparkNSFW",
-            "description": "Sende einen anonymen Spark.",
+            "description": "Sende einen Spark.",
             "error": "Du kannst in diesem Channel keine Sparks verschicken!"
         },
         "settings": {
@@ -66,52 +66,52 @@
         }
     },
     "sparks": {
-        "Blush ☺️": {
+        "Blush": {
             "anonym": ", jemand traut sich kaum, dich anzusprechen… aus Angst, rot zu werden 🫣",
             "text": ", {userName} traut sich kaum, dich anzusprechen… aus Angst, rot zu werden 🫣",
             "name": "Blush <:HugeBlush:1430581995406229584>"
         },
-        "Smile 😊": {
+        "Smile": {
             "anonym": ", jemand lächelt jedes Mal innerlich, wenn er dich sieht 🌸",
             "text": ", {userName} lächelt jedes Mal innerlich, wenn er dich sieht 🌸",
             "name": "Smile <:CuteSunGlass:1430581937570840596>"
         },
-        "Fantasy 💭": {
+        "Fantasy": {
             "anonym": ", jemand fantasiert über dich… ohne dir jemals etwas zu sagen 💭",
             "text": ", {userName} fantasiert über dich… ohne dir jemals etwas zu sagen 💭",
             "name": "Fantasy 💭"
         },
-        "Bewunderung 🌹": {
+        "Bewunderung": {
             "anonym": ", jemand findet dich umwerfend, aber traut sich nur, aus der Ferne zu schwärmen 🌹",
             "text": ", {userName} findet dich umwerfend, aber traut sich nur, aus der Ferne zu schwärmen 🌹",
             "name": "Bewunderung <:CuteEmote:1430581879077081239>"
         },
-        "Sexy 💃": {
+        "Sexy": {
             "anonym": ", jemand findet dich heute einfach verboten sexy 🫦",
             "text": ", {userName} findet dich heute einfach verboten sexy 🫦",
             "name": "Date? <a:Touch_Some_Grass:1393159971495215124>"
         },
-        "Tease 😏": {
+        "Tease": {
             "anonym": ", jemand würde dich gern ein bisschen necken… und so 😏",
             "text": ", {userName} würde dich gern ein bisschen necken… und so 😏",
             "name": "Tease 😏"
         },
-        "Lippen 👄": {
+        "Lippen": {
             "anonym": "jemand denkt gerade an deine Lippen… und was sie alles tun könnten 👄",
             "text": "{userName} denkt gerade an deine Lippen… und was sie alles tun könnten 👄",
             "name": "Lippen 👄"
         },
-        "Wink 😘": {
+        "Wink": {
             "anonym": ", jemand schickt dir gerade einen verführerischen Blick 😘",
             "text": ", {userName} schickt dir gerade einen verführerischen Blick 😘",
             "name": "Hot :fire: <:POGGERS:1275782361459462256>"
         },
-        "Shy Flirt 🥰": {
+        "Shy Flirt": {
             "anonym": "jemand flirtet schüchtern mit dir… und hofft, dass du es bemerkst 🥰",
             "text": "{userName} flirtet schüchtern mit dir… und hofft, dass du es bemerkst 🥰",
             "name": "Flirt"
         },
-        "bite 🧛": {
+        "bite": {
             "anonym": ",  jemand würde dir jetzt zu gern in den Hals beißen <:Bite:1430608155204784128>",
             "text": ",  {userName} würde dir jetzt zu gern in den Hals beißen <:Bite:1430608155204784128>",
             "name": "Bite <:Bite:1430608155204784128>"
