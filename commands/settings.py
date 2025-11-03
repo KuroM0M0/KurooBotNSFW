@@ -73,17 +73,18 @@ class newSettings(discord.ui.View):
         embed = discord.Embed(title="Einstellungen", color=0x005b96)
         embed.add_field(
             name=f"{translate(self.locale, 'embed.settings.privacy')}",
-            value=f">>> `Streak` → {self.streakPrivate}\n"
-                f"`{translate(self.locale, 'embed.settings.privacy.profil')}` → {self.profilPrivate}\n"
-                f"`Stats` → {self.statsPrivate}",
+            value=f">>> `Streak` → {self.streakPrivate}\n",
+                #f"`{translate(self.locale, 'embed.settings.privacy.profil')}` → {self.profilPrivate}\n" Profil gibts noch nich
+                #f"`Stats` → {self.statsPrivate}",
             inline=False
         )
         embed.add_field(
             name=f"{translate(self.locale, 'embed.settings.general')}",
             value=f">>> `Ping` → {self.Ping}\n"
-                f"`Newsletter` → {self.newsletter}\n"
+                f"`Spark Intensität` → {self.sparkIntensity}\n"
                 f"`SparkDM` → {self.sparkDM}\n"
-                f"`Custom Sparks` → {self.customSpark}",
+                f"`Newsletter` → {self.newsletter}\n",
+                #f"`Custom Sparks` → {self.customSpark}",
             inline=False
         )
         return embed
@@ -108,8 +109,9 @@ class SettingSelect(discord.ui.Select):
         if hatPremium:
             #options.append(discord.SelectOption(label="Stats", description="Stelle ein, ob deine Stats Privat oder Öffentlich angezeigt werden sollen", value="stats", emoji="📊"))
             options.append(discord.SelectOption(label="Ping", description="Stelle ein, ob du Pings erhalten möchtest", value="Ping", emoji="<:PeepoPing:1412450415986872461>"))
-            options.append(discord.SelectOption(label="Newsletter", description="Stelle ein, ob du Updates vom Bot in deine DMs erhalten möchtest", value="newsletter", emoji="📰"))
+            options.append(discord.SelectOption(label="Spark Intensität", description="Stelle ein was für Sparks du erhalten möchtest.", value="sparkintensity", emoji="🔞"))
             options.append(discord.SelectOption(label="SparkDM", description="Stelle ein, ob du vom Bot angeschrieben werden willst, wenn du gesparkt wurdest", value="sparkdm", emoji="<:Schaufel:1410610904361472031>"))
+            options.append(discord.SelectOption(label="Newsletter", description="Stelle ein, ob du Updates vom Bot in deine DMs erhalten möchtest", value="newsletter", emoji="📰"))
             #options.append(discord.SelectOption(label="Custom Sparks", description="Stelle ein, ob du Custom Sparks erhalten möchtest", value="customsparks", emoji="✨"))
         else: #Damit bei Premium alles in richtiger Reihenfolge angezeigt wird
             options.append(discord.SelectOption(label="Ping", description="Stelle ein, ob du Pings erhalten möchtest", value="Ping", emoji="<:PeepoPing:1412450415986872461>"))

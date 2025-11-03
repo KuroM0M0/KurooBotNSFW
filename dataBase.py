@@ -497,7 +497,29 @@ def getPremium(connection, userID):
     if connection is not None:
         cursor = connection.cursor()
         try:
-            cursor.execute('''  SELECT HatPremium
+            cursor.execute('''  SELECT PremiumTimeInMonths
+                                FROM User
+                                WHERE UserID = ?''',
+                                (userID,))
+            result = cursor.fetchone()
+            if result is None or result[0] == 0:
+                return False
+            else:
+                return True
+        except sqlite3.Error as e:
+            print(f"Fehler beim Abrufen von Premium: {e}")
+    else:
+        print("Keine Datenbankverbindung verfügbar")
+        return {}
+    
+
+
+
+def getPremiumInMonths(connection, userID):
+    if connection is not None:
+        cursor = connection.cursor()
+        try:
+            cursor.execute('''  SELECT PremiumTimeInMonths
                                 FROM User
                                 WHERE UserID = ?''',
                                 (userID,))
@@ -506,7 +528,7 @@ def getPremium(connection, userID):
                 return 0
             return result[0]
         except sqlite3.Error as e:
-            print(f"Fehler beim Abrufen von Premium: {e}")
+            print(f"Fehler beim Abrufen von PremiumInMonths: {e}")
     else:
         print("Keine Datenbankverbindung verfügbar")
         return {}
@@ -535,16 +557,16 @@ def getPremiumTimestamp(connection, userID):
 
 
 
-def setPremium(connection, userID):
+def setPremium(connection, userID, Months):
     if connection is not None:
         cursor = connection.cursor()
         time = datetime.now().isoformat()
         try:
             cursor.execute('''  UPDATE User
-                                SET HatPremium = 1,
+                                SET PremiumTimeInMonths = ?,
                                 PremiumTimestamp = ?
                                 WHERE UserID = ?''',
-                                (time, userID))
+                                (Months, time, userID))
             connection.commit()
         except sqlite3.Error as e:
             print(f"Fehler beim Updaten von Premium: {e}")
@@ -559,7 +581,7 @@ def resetPremium(connection, userID):
         cursor = connection.cursor()
         try:
             cursor.execute('''  UPDATE User
-                                SET HatPremium = 0
+                                SET PremiumTimeInMonths = 0
                                 WHERE UserID = ?''',
                                 (userID,))
             connection.commit()

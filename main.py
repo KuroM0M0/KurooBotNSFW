@@ -107,6 +107,7 @@ async def loadCommands():
     await bot.load_extension("commands.spark")
     await bot.load_extension("commands.Test")
     await bot.load_extension("commands.adminCommands")
+    await bot.load_extension("commands.kuroCommands")
 
 
 
