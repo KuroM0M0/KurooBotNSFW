@@ -3,7 +3,7 @@ import json
 import random
 from discord.ext import commands
 from discord import Interaction, Locale, app_commands
-from main import connection, translate
+from main import connection, BotID, translate
 from commands.settings import CheckUserIsInSettings
 from dataBase import *
 from Methoden import *
@@ -98,6 +98,8 @@ class SparkModal(discord.ui.Modal):
 
     async def on_submit(self, interaction: discord.Interaction):
         targetName = self.targetName
+        target = self.target
+        targetID = target.id
         kompliment = self.select.values[0]
         serverID = interaction.guild_id
         UserExists(str(interaction.user.id))
@@ -116,9 +118,25 @@ class SparkModal(discord.ui.Modal):
         embed.set_thumbnail(url=self.target.display_avatar.url)
         embed.set_footer(text=f"Spark ID: {getSparkID(connection)}")
         await interaction.response.send_message(translate(interaction.locale, "modal.spark.onSubmit", targetName=targetName), ephemeral=True)
-        await interaction.followup.send(embed=embed)
+
+        if getPingSetting(connection, interaction.user.id):
+            await interaction.followup.send(embed=embed, content=f"||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​|| {target.mention}")
+        else:
+            await interaction.followup.send(embed=embed)
+
+        if getSparkDM(connection, targetID) == True:
+            await asyncio.sleep(2)
+            await sendSparkDM(targetID, interaction)
 
 
+
+async def sendSparkDM(targetID, interaction):
+    channel = interaction.channel
+    async for msg in channel.history(limit=1):
+        if msg.author.id == BotID:
+            target = await interaction.client.fetch_user(int(targetID))
+            embed = discord.Embed(title="Du wurdest gesparkt!", description=msg.jump_url, color=0x005b96)
+            await target.send(embed=embed)
 
 
 # Setup-Funktion für Cog
