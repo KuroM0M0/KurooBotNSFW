@@ -14,6 +14,7 @@ logging.basicConfig(level=logging.WARNING)
 BotToken = os.getenv("BotToken")
 KuroID = os.getenv("KuroID")
 Kurocord = os.getenv("Kurocord")
+BotID = int(os.getenv("BotID"))
 intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
