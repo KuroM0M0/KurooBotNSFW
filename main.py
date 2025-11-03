@@ -29,9 +29,8 @@ for language in ["de", "en"]:
 
 #Mapping von Discord Locales zu den JSON-Keys
 locale_map = {
-    Locale.german: "de",
-    Locale.american_english: "en",
-    Locale.british_english: "en"
+    Locale.german: "de"
+    #Alles andere ist Englisch
 }
 
 def translate(locale: Locale, path: str, **kwargs):
@@ -108,6 +107,7 @@ async def loadCommands():
     await bot.load_extension("commands.Test")
     await bot.load_extension("commands.adminCommands")
     await bot.load_extension("commands.kuroCommands")
+    await bot.load_extension("commands.help")
 
 
 
