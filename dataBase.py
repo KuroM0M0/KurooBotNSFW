@@ -1982,3 +1982,57 @@ def setSparkIntensity(connection, userID, typ):
             print(f"Fehler beim setzen der SparktypeSetting: {e}")
     else:
         print("Keine Datenbankverbindung verführbar")
+
+
+
+
+def getServerSettings(connection, serverID):
+    if connection is not None:
+        cursor = connection.cursor()
+        try:
+            cursor.execute('''  SELECT *
+                                FROM ServerSettings
+                                WHERE ServerID = ?''',
+                                (serverID,))
+            result = cursor.fetchone()
+            return result
+        except sqlite3.Error as e:
+            print(f"Fehler beim selecten von ServerSettings: {e}")
+    else:
+        print("Keine Datenbankverbindung verführbar")
+
+
+
+
+def getServerAnonymHug(connection, serverID):
+    if connection is not None:
+        cursor = connection.cursor()
+        try:
+            cursor.execute('''  SELECT AnonymHug
+                                FROM ServerSettings
+                                WHERE ServerID = ?''',
+                                (serverID,))
+            result = cursor.fetchone()
+            return result[0]
+        except sqlite3.Error as e:
+            print(f"Fehler beim selecten von HugPath: {e}")
+    else:
+        print("Keine Datenbankverbindung verführbar")
+
+
+
+
+def getServerAnonymSpark(connection, serverID):
+    if connection is not None:
+        cursor = connection.cursor()
+        try:
+            cursor.execute('''  SELECT AnonymSpark
+                                FROM ServerSettings
+                                WHERE ServerID = ?''',
+                                (serverID,))
+            result = cursor.fetchone()
+            return result[0]
+        except sqlite3.Error as e:
+            print(f"Fehler beim selecten von SparkPath: {e}")
+    else:
+        print("Keine Datenbankverbindung verführbar")

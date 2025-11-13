@@ -4,7 +4,7 @@ import random
 from discord.ext import commands
 from discord import Interaction, Locale, app_commands
 from main import connection, BotID, translate
-from commands.settings import CheckUserIsInSettings
+from commands.SlashCommands.settings import CheckUserIsInSettings
 from dataBase import *
 from Methoden import *
 
