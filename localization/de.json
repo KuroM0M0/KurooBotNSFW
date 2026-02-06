@@ -3,7 +3,8 @@
         "sparknsfw": {
             "name": "SparkNSFW",
             "description": "Sende einen Spark.",
-            "error": "Du kannst in diesem Channel keine Sparks verschicken!"
+            "error": "Du kannst in diesem Channel keine Sparks verschicken!",
+            "noSparksLeft": "Du hast keine Sparks mehr. Versuch es morgen nochmal!"
         },
         "settings": {
             "name": "Einstellungen",
@@ -89,7 +90,7 @@
         "Sexy": {
             "anonym": ", jemand findet dich heute einfach verboten sexy 🫦",
             "text": ", {userName} findet dich heute einfach verboten sexy 🫦",
-            "name": "Date? <a:Touch_Some_Grass:1393159971495215124>"
+            "name": "Spice 🫦"
         },
         "Tease": {
             "anonym": ", jemand würde dich gern ein bisschen necken… und so 😏",
@@ -104,7 +105,7 @@
         "Wink": {
             "anonym": ", jemand schickt dir gerade einen verführerischen Blick 😘",
             "text": ", {userName} schickt dir gerade einen verführerischen Blick 😘",
-            "name": "Hot :fire: <:POGGERS:1275782361459462256>"
+            "name": "Wink 😘"
         },
         "Shy Flirt": {
             "anonym": "jemand flirtet schüchtern mit dir… und hofft, dass du es bemerkst 🥰",
@@ -118,5 +119,6 @@
         }
     },
     "yes": "Ja ✅",
-    "no": "Nein ❌"
+    "no": "Nein ❌",
+    "half": "Halb ⚠️"
 }

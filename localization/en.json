@@ -2,12 +2,32 @@
     "command": {
         "sparknsfw": {
             "name": "SparkNSFW",
-            "description": "Sende einen anonymen Spark."
+            "description": "Send a Spark.",
+            "error": "You cannot send Sparks in this Channel!",
+            "noSparksLeft": "You dont have any Sparks left."
         },
         "settings": {
-            "name": "Einstellungen",
-            "description": "Einstellungen",
-            "sparks": "Wähle aus, welche Sparks du erhalten kannst.",
+            "name": "Settings",
+            "description": "Settings",
+            "sparks": "Wähle aus, welche Sparks du erhalten kannst."
+        }
+    },
+    "embed": {
+        "shop": {
+            "name": "Shop",
+            "description": "Open the shop to buy Items."
+        },
+        "settings": {
+            "privacy": {
+                "_label": "🔒 Privacy Settings",
+                "profil": "Profil"
+            },
+            "premium": {
+                "_label": "💎 Premium Settings"
+            },
+            "general": {
+                "_label": "⚙️ General Settings"
+            },
             "format": {
                 "privacy": {
                     "public": "Public 🌐",
@@ -20,23 +40,85 @@
             }
         }
     },
-    "embed": {
-        "shop": {
-            "name": "Shop",
-            "description": "Öffne den Shop um dir Items zu kaufen."
+    "modal": {
+        "spark": {
+            "title": "Send a Spark to {targetName}",
+            "description": "Test",
+            "onSubmit": "The Spark was successfully sent to {targetName}!",
+            "sparkSelect": {
+                "text": "Which Spark do you want to send?",
+                "description": ""
+            },
+            "anonym": {
+                "text": "Should the Spark be anonymous?",
+                "description": ""
+            }
+        },
+        "sparkIntensity": {
+            "title": "Which Sparks do you want to receive?",
+            "text": "text Test",
+            "description": "beschreibungs Test",
+            "options": {
+                "softDesc": "Bewunderung, Fantasy, Smile, Blush",
+                "spicyDesc": "Sexy, Tease, Lippen, Wink, Shy Flirt + all above",
+                "explicitDesc": "Everyone can send you all Sparks."
+            },
+            "error": "Error: {error}"
         }
     },
-    "modal": {
-        "settings": {
-            "title": "Einstellungen",
-            "description": ""
+    "sparks": {
+        "Blush": {
+            "anonym": ", jemand traut sich kaum, dich anzusprechen… aus Angst, rot zu werden 🫣",
+            "text": ", {userName} traut sich kaum, dich anzusprechen… aus Angst, rot zu werden 🫣",
+            "name": "Blush <:HugeBlush:1430581995406229584>"
         },
-        "spark": {
-            "title": "Send Spark to ",
-            "description": "",
-            "SparkSelect": {
-                "text": "Welcher Spark wirst du senden?"
-            }
+        "Smile": {
+            "anonym": ", jemand lächelt jedes Mal innerlich, wenn er dich sieht 🌸",
+            "text": ", {userName} lächelt jedes Mal innerlich, wenn er dich sieht 🌸",
+            "name": "Smile <:CuteSunGlass:1430581937570840596>"
+        },
+        "Fantasy": {
+            "anonym": ", jemand fantasiert über dich… ohne dir jemals etwas zu sagen 💭",
+            "text": ", {userName} fantasiert über dich… ohne dir jemals etwas zu sagen 💭",
+            "name": "Fantasy 💭"
+        },
+        "Bewunderung": {
+            "anonym": ", jemand findet dich umwerfend, aber traut sich nur, aus der Ferne zu schwärmen 🌹",
+            "text": ", {userName} findet dich umwerfend, aber traut sich nur, aus der Ferne zu schwärmen 🌹",
+            "name": "Bewunderung <:CuteEmote:1430581879077081239>"
+        },
+        "Sexy": {
+            "anonym": ", jemand findet dich heute einfach verboten sexy 🫦",
+            "text": ", {userName} findet dich heute einfach verboten sexy 🫦",
+            "name": "Date? <a:Touch_Some_Grass:1393159971495215124>"
+        },
+        "Tease": {
+            "anonym": ", jemand würde dich gern ein bisschen necken… und so 😏",
+            "text": ", {userName} würde dich gern ein bisschen necken… und so 😏",
+            "name": "Tease 😏"
+        },
+        "Lippen": {
+            "anonym": "jemand denkt gerade an deine Lippen… und was sie alles tun könnten 👄",
+            "text": "{userName} denkt gerade an deine Lippen… und was sie alles tun könnten 👄",
+            "name": "Lippen 👄"
+        },
+        "Wink": {
+            "anonym": ", jemand schickt dir gerade einen verführerischen Blick 😘",
+            "text": ", {userName} schickt dir gerade einen verführerischen Blick 😘",
+            "name": "Hot :fire: <:POGGERS:1275782361459462256>"
+        },
+        "Shy Flirt": {
+            "anonym": "jemand flirtet schüchtern mit dir… und hofft, dass du es bemerkst 🥰",
+            "text": "{userName} flirtet schüchtern mit dir… und hofft, dass du es bemerkst 🥰",
+            "name": "Flirt"
+        },
+        "bite": {
+            "anonym": ",  jemand würde dir jetzt zu gern in den Hals beißen <:Bite:1430608155204784128>",
+            "text": ",  {userName} würde dir jetzt zu gern in den Hals beißen <:Bite:1430608155204784128>",
+            "name": "Bite <:Bite:1430608155204784128>"
         }
-    }
+    },
+    "yes": "Yes ✅",
+    "no": "No ❌",
+    "half": "Half ⚠️"
 }

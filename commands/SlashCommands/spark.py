@@ -18,7 +18,7 @@ class Spark(commands.Cog):
         self.bot = bot
 
 
-    @app_commands.command(name="sparknsfw", description="Send anonymous Sparks") #kann nicht dynamisch gesetzt werden
+    @app_commands.command(name="sparknsfw", description="Send anonymous Sparks") #kann nicht dynamisch gesetzt werden, deswegen englisch
     async def sparkNSFW(self, interaction: discord.Interaction, user: discord.User):
         userID = str(interaction.user.id)
         targetID = str(user.id)
@@ -33,6 +33,9 @@ class Spark(commands.Cog):
         CheckUserIsInSettings(userID)
         CheckUserIsInSettings(targetID)
         CheckServerExists(interaction.guild_id)
+        if CheckPossibleSparks(userID) == False:
+            await interaction.response.send_message(translate(interaction.locale, "command.sparknsfw.noSparksLeft"), ephemeral=True)
+            return
 
         Sparktyp = getSparkIntensity(connection, targetID) #für später wichtig im Modal, um abzufragen welche Sparks angezeigt werden sollen
         await interaction.response.send_modal(SparkModal(target, interaction.locale, Sparktyp))
@@ -103,7 +106,8 @@ class SparkModal(discord.ui.Modal):
         kompliment = self.select.values[0]
         serverID = interaction.guild_id
         UserExists(str(interaction.user.id))
-        insertLogs(connection, datetime.now().isoformat(), interaction.user.id, self.target.id, serverID, kompliment, "Spark", 1)
+        removePossibleSpark(interaction.user.id)
+        
 
         if self.anonym.values[0] == "yes":
             desc = translate(interaction.locale, f"sparks.{kompliment}.anonym")
@@ -120,7 +124,7 @@ class SparkModal(discord.ui.Modal):
         await interaction.response.send_message(translate(interaction.locale, "modal.spark.onSubmit", targetName=targetName), ephemeral=True)
 
         if getPingSetting(connection, interaction.user.id):
-            await interaction.followup.send(embed=embed, content=f"||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​|| {target.mention}")
+            await interaction.followup.send(embed=embed, content=f"{target.mention}")
         else:
             await interaction.followup.send(embed=embed)
 

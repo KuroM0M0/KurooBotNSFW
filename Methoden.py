@@ -19,6 +19,18 @@ def UserExists(userID):
     if exists is None:
         insertUser(connection, userID)
 
+def CheckPossibleSparks(userID):
+    UserExists(userID)
+    possibleSparks = getPossibleSparks(connection, userID)
+    if possibleSparks <= 0:
+        return False 
+    else:
+        return True
+
+def removePossibleSpark(userID):
+    possibleSparks = getPossibleSparks(connection, userID)
+    setPossibleSparks(connection, userID, possibleSparks - 1)  
+
 
 async def CheckSparkChannel(connection, guildID, channelID, interaction):
     sparkChannel = getChannelSparkID(connection, guildID)

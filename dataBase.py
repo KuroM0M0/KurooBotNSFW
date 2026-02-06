@@ -674,11 +674,10 @@ def insertUser(connection, userID):
         cursor = connection.cursor()
         try:
             cursor.execute('''  INSERT INTO User
-                                (UserID, PremiumTimestamp, PremiumTimeInMonths, VotePoints, StreakPoints, Streak)
-                                VALUES(?, 0, 0, 0, 0, 0)''',
+                                (UserID, PremiumTimestamp, PremiumTimeInMonths, VotePoints, StreakPoints, Streak, possibleSparks)
+                                VALUES(?, 0, 0, 0, 0, 0, 1)''',
                                 (userID,))
             connection.commit()
-            print("TestErfolg")
         except sqlite3.Error as e:
             print(f"Fehler beim Einfügen des Users: {e}")
     else:
@@ -1995,6 +1994,8 @@ def getServerSettings(connection, serverID):
                                 WHERE ServerID = ?''',
                                 (serverID,))
             result = cursor.fetchone()
+            if result == None:
+                return False
             return result
         except sqlite3.Error as e:
             print(f"Fehler beim selecten von ServerSettings: {e}")
@@ -2034,5 +2035,110 @@ def getServerAnonymSpark(connection, serverID):
             return result[0]
         except sqlite3.Error as e:
             print(f"Fehler beim selecten von SparkPath: {e}")
+    else:
+        print("Keine Datenbankverbindung verführbar")
+
+
+
+
+def setServerAnonymHug(connection, serverID, value):
+    if connection is not None:
+        cursor = connection.cursor()
+        try:
+            cursor.execute('''  UPDATE ServerSettings
+                                SET AnonymHug = ?
+                                WHERE ServerID = ?''',
+                                (value, serverID))
+            connection.commit()
+        except sqlite3.Error as e:
+            print(f"Fehler beim setzen der AnonymHug: {e}")
+    else:
+        print("Keine Datenbankverbindung verführbar")
+
+
+
+
+def setServerAnonymSpark(connection, serverID, value):
+    if connection is not None:
+        cursor = connection.cursor()
+        try:
+            cursor.execute('''  UPDATE ServerSettings
+                                SET AnonymSpark = ?
+                                WHERE ServerID = ?''',
+                                (value, serverID))
+            connection.commit()
+        except sqlite3.Error as e:
+            print(f"Fehler beim setzen der AnonymSpark: {e}")
+    else:
+        print("Keine Datenbankverbindung verführbar")
+
+
+
+
+def getServerPremium(connection, serverID):
+    if connection is not None:
+        cursor = connection.cursor()
+        try:
+            cursor.execute('''  SELECT PremiumInMonths
+                                FROM Server
+                                WHERE ServerID = ?''',
+                                (serverID,))
+            result = cursor.fetchone()
+            if result is None:
+                return 0
+            return result[0]
+        except sqlite3.Error as e:
+            print(f"Fehler beim selecten von SparkPath: {e}")
+    else:
+        print("Keine Datenbankverbindung verführbar")
+
+
+
+
+def getPossibleSparks(connection, userID):
+    if connection is not None:
+        cursor = connection.cursor()
+        try:
+            cursor.execute('''  SELECT possibleSparks
+                                FROM User
+                                WHERE UserID = ?''',
+                                (userID,))
+            result = cursor.fetchone()
+            return result[0]
+        except sqlite3.Error as e:
+            print(f"Fehler beim selecten von PossibleSparks: {e}")
+    else:
+        print("Keine Datenbankverbindung verführbar")
+
+
+
+
+def setPossibleSparks(connection, userID, possibleSparks):
+    if connection is not None:
+        cursor = connection.cursor()
+        try:
+            cursor.execute('''  UPDATE User
+                                SET possibleSparks = ?
+                                WHERE UserID = ?''',
+                                (possibleSparks, userID))
+            connection.commit()
+        except sqlite3.Error as e:
+            print(f"Fehler beim setzen der PossibleSparks: {e}")
+    else:
+        print("Keine Datenbankverbindung verführbar")
+
+
+
+
+def addPossibleSparksForAllUsers(connection):
+    if connection is not None:
+        cursor = connection.cursor()
+        try:
+            cursor.execute('''  UPDATE User
+                                SET possibleSparks = MIN(possibleSparks + 1, 10)''',
+                                )
+            connection.commit()
+        except sqlite3.Error as e:
+            print(f"Fehler beim setzen der PossibleSparks: {e}")
     else:
         print("Keine Datenbankverbindung verführbar")
