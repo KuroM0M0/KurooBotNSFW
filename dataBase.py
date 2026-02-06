@@ -593,14 +593,14 @@ def resetPremium(connection, userID):
 
 
 
-def insertLogs(connection, Timestamp, UserID, TargetID, ServerID, Spark, Typ, Anonym):
+def insertLogs(connection, Timestamp, UserID, TargetID, ServerID, Spark, Typ, Anonym, isRevealed = 0):
     if connection is not None:
         cursor = connection.cursor()
         try:
             cursor.execute('''  INSERT INTO Logs
-                                (Timestamp, UserID, TargetID, ServerID, Spark, Typ, Anonym)
-                                VALUES (?, ?, ?, ?, ?, ?, ?)''',
-                                (Timestamp, UserID, TargetID, ServerID, Spark, Typ, Anonym))
+                                (Timestamp, UserID, TargetID, ServerID, Spark, Typ, Anonym, isRevealed)
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
+                                (Timestamp, UserID, TargetID, ServerID, Spark, Typ, Anonym, isRevealed))
             connection.commit()
         except sqlite3.Error as e:
             print(f"Fehler beim Insert von Logs: {e}")
@@ -1641,9 +1641,9 @@ def getReveals(connection, userID):
     if connection is not None:
         cursor = connection.cursor()
         try:
-            cursor.execute('''  SELECT ID, Timestamp, Compliment
+            cursor.execute('''  SELECT ID, Timestamp, Spark
                                 FROM Logs
-                                WHERE TargetID = ? AND Reveal = 1 AND isRevealed = 0 AND Typ = 'Compliment' ''',
+                                WHERE TargetID = ? AND Anonym = 2 AND isRevealed = 0''',
                                 (userID,))
             result = cursor.fetchall()
             return result
@@ -1659,7 +1659,7 @@ def getRevealsCustom(connection, userID):
     if connection is not None:
         cursor = connection.cursor()
         try:
-            cursor.execute('''  SELECT ID, Timestamp, Compliment
+            cursor.execute('''  SELECT ID, Timestamp, Spark
                                 FROM Logs
                                 WHERE TargetID = ? AND Reveal = 1 AND isRevealed = 0 AND Typ = 'Custom' ''',
                                 (userID,))
@@ -1712,9 +1712,9 @@ def getRevealedSparks(connection, userID):
     if connection is not None:
         cursor = connection.cursor()
         try:
-            cursor.execute('''  SELECT ID, Timestamp, Compliment, UserName
+            cursor.execute('''  SELECT ID, Timestamp, Spark, UserID
                                 FROM Logs
-                                WHERE TargetID = ? AND isRevealed = 1 AND Typ = 'Compliment' ''',
+                                WHERE TargetID = ? AND isRevealed = 1''',
                                 (userID,))
             result = cursor.fetchall()
             return result
@@ -2005,7 +2005,33 @@ def getServerSettings(connection, serverID):
 
 
 
+def insertServerSettings(connection, serverID):
+    if connection is not None:
+        cursor = connection.cursor()
+        try:
+            cursor.execute('''  INSERT INTO ServerSettings (ServerID)
+                                VALUES (?)''',
+                                (serverID,))
+            connection.commit()
+        except sqlite3.Error as e:
+            print(f"Fehler beim inserten von ServerSettings: {e}")
+    else:
+        print("Keine Datenbankverbindung verführbar")
+
+
+
+
 def getServerAnonymHug(connection, serverID):
+    """
+    Gibt den Wert von Anonym für den Server mit der ServerID zurück.
+
+    Args:
+        connection (sqlite3.Connection): Die Verbindung zur Datenbank.
+        serverID (int): Die ID des Servers.
+
+    Returns:
+        int: Der Wert von Anonym (0 = Ja/Halb/Nein, 1 = Ja/Halb).
+    """
     if connection is not None:
         cursor = connection.cursor()
         try:
@@ -2014,9 +2040,11 @@ def getServerAnonymHug(connection, serverID):
                                 WHERE ServerID = ?''',
                                 (serverID,))
             result = cursor.fetchone()
+            if result is None:
+                return 1
             return result[0]
         except sqlite3.Error as e:
-            print(f"Fehler beim selecten von HugPath: {e}")
+            print(f"Fehler beim selecten von SparkPath: {e}")
     else:
         print("Keine Datenbankverbindung verführbar")
 
@@ -2024,6 +2052,16 @@ def getServerAnonymHug(connection, serverID):
 
 
 def getServerAnonymSpark(connection, serverID):
+    """
+    Gibt den Wert von Anonym für den Server mit der ServerID zurück.
+
+    Args:
+        connection (sqlite3.Connection): Die Verbindung zur Datenbank.
+        serverID (int): Die ID des Servers.
+
+    Returns:
+        int: Der Wert von Anonym (0 = Ja/Halb/Nein, 1 = Ja/Halb).
+    """
     if connection is not None:
         cursor = connection.cursor()
         try:
@@ -2032,6 +2070,8 @@ def getServerAnonymSpark(connection, serverID):
                                 WHERE ServerID = ?''',
                                 (serverID,))
             result = cursor.fetchone()
+            if result is None:
+                return 1
             return result[0]
         except sqlite3.Error as e:
             print(f"Fehler beim selecten von SparkPath: {e}")

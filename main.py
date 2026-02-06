@@ -103,13 +103,15 @@ async def on_guild_remove(guild):
 
 
 async def loadCommands():
-    await bot.load_extension("commands.settings")
-    await bot.load_extension("commands.spark")
+    await bot.load_extension("commands.PrefixCommands.settings")
+    await bot.load_extension("commands.SlashCommands.settings")
+    await bot.load_extension("commands.SlashCommands.spark")
     await bot.load_extension("commands.Test")
-    await bot.load_extension("commands.adminCommands")
-    await bot.load_extension("commands.kuroCommands")
-    await bot.load_extension("commands.help")
+    await bot.load_extension("commands.PrefixCommands.adminCommands")
+    await bot.load_extension("commands.PrefixCommands.kuroCommands")
+    await bot.load_extension("commands.SlashCommands.help")
     await bot.load_extension("commands.error")
+    await bot.load_extension("commands.SlashCommands.reveal")
 
 
 
