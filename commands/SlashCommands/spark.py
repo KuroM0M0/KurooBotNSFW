@@ -22,6 +22,7 @@ class Spark(commands.Cog):
     async def sparkNSFW(self, interaction: discord.Interaction, user: discord.User):
         userID = str(interaction.user.id)
         targetID = str(user.id)
+        serverID = str(interaction.guild_id)
         target = user
         channelID = interaction.channel.id
         NSFWChannel = getChannelSparkID(connection, interaction.guild_id)
@@ -38,17 +39,19 @@ class Spark(commands.Cog):
             return
 
         Sparktyp = getSparkIntensity(connection, targetID) #für später wichtig im Modal, um abzufragen welche Sparks angezeigt werden sollen
-        await interaction.response.send_modal(SparkModal(target, interaction.locale, Sparktyp))
+        AnonymSettings = getServerAnonymSpark(connection, serverID)
+        await interaction.response.send_modal(SparkModal(target, interaction.locale, Sparktyp, AnonymSettings))
 
 
 
 
 class SparkModal(discord.ui.Modal):
-    def __init__(self, target: discord.User, locale: Locale, Sparktyp: str):
+    def __init__(self, target: discord.User, locale: Locale, Sparktyp: str, AnonymSettings: int):
         super().__init__(title=translate(locale, "modal.spark.title", targetName=target.name))
         self.target = target
         self.targetName = target.name
         self.Sparktyp = Sparktyp
+        self.AnonymSettings = AnonymSettings
 
         
         if Sparktyp == "Explicit":
@@ -87,10 +90,17 @@ class SparkModal(discord.ui.Modal):
                 component = self.select)
             self.add_item(sparks)
 
-        self.anonym = discord.ui.Select(
-            options=[
-                discord.SelectOption(label=translate(locale, "yes"), value="yes"),
-                discord.SelectOption(label=translate(locale, "no"), value="no")])
+        if self.AnonymSettings == 0:
+            self.anonym = discord.ui.Select(
+                options=[
+                    discord.SelectOption(label=translate(locale, "yes"), value="yes"),
+                    discord.SelectOption(label=translate(locale, "half"), value="half"),
+                    discord.SelectOption(label=translate(locale, "no"), value="no")])
+        else:
+            self.anonym = discord.ui.Select(
+                options=[
+                    discord.SelectOption(label=translate(locale, "yes"), value="yes"),
+                    discord.SelectOption(label=translate(locale, "half"), value="half"),])
         
         anonym = discord.ui.Label(
             text = translate(locale, "modal.spark.anonym.text"),
@@ -111,8 +121,14 @@ class SparkModal(discord.ui.Modal):
 
         if self.anonym.values[0] == "yes":
             desc = translate(interaction.locale, f"sparks.{kompliment}.anonym")
+            insertLogs(connection, datetime.now().isoformat(), interaction.user.id, self.target.id, serverID, kompliment, "Spark", 1)
+        elif self.anonym.values[0] == "half":
+            desc = translate(interaction.locale, f"sparks.{kompliment}.anonym")
+            insertLogs(connection, datetime.now().isoformat(), interaction.user.id, self.target.id, serverID, kompliment, "Spark", 2)
         else:
             desc = translate(interaction.locale, f"sparks.{kompliment}.text", userName=interaction.user.mention)
+            insertLogs(connection, datetime.now().isoformat(), interaction.user.id, self.target.id, serverID, kompliment, "Spark", 0, 1)
+            print("else Teil")
         embed = discord.Embed(
         title=translate(interaction.locale, f"sparks.{kompliment}.name"),
         description=f"{self.target.mention} {desc}",

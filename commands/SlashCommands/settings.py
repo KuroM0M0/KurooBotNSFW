@@ -159,6 +159,9 @@ class SettingSelect(discord.ui.Select):
             await interaction.response.send_modal(SparkIntensityModal(locale))
 
         # ----- Embed neu aufbauen -----
+        if value == "sparkintensity":
+            return
+        
         settingsObj = newSettings(self.hatPremium, userID, locale)
         await interaction.response.edit_message(embed=settingsObj.getEmbed(), view=self.view) #nach Modal auch aktualisieren
 
