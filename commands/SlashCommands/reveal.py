@@ -1,4 +1,5 @@
 import discord
+import os
 from datetime import datetime
 from discord import app_commands, ui
 from discord.ext import commands
@@ -56,10 +57,7 @@ class RevealCog(commands.Cog):
 
         # --- LOGIK FÜR DIE ÜBERSICHT ---
         else:"""
-            # Wir nutzen hier die buildMainEmbed Funktion aus deiner reveal.py Datei!
         embed = buildMainEmbed(reveals, revealed, interaction)
-            
-            # Wir nutzen die RevealMainView aus deiner reveal.py
         view = RevealMainView(reveals, revealed)
             
         await interaction.followup.send(embed=embed, view=view, ephemeral=True)
@@ -120,16 +118,20 @@ def revealEmbed(revealed):
 def buildMainEmbed(reveals, revealed, interaction):
     description_lines = []
 
+    with open("sparks.json", "r", encoding="utf8") as f:
+        sparksData = json.load(f)
+
     if revealed:
         description_lines.append("**Bereits revealed:**")
         for spark_id, timestamp, compliment, sender_name in revealed:
             compliment = replaceEmotes(compliment, interaction.guild, interaction.client)
+            emote = sparksData[compliment]["Emote"]
             try:
                 dt = datetime.fromisoformat(timestamp)
                 unix_ts = int(dt.timestamp())
             except ValueError:
                 unix_ts = 0
-            description_lines.append(f"{compliment} — <t:{unix_ts}:R> — von **{sender_name}** — ID `{spark_id}`")
+            description_lines.append(f"{compliment}{emote} — <t:{unix_ts}:R> — von **{sender_name}** — ID `{spark_id}`")
 
     if reveals:
         if description_lines:
@@ -137,12 +139,13 @@ def buildMainEmbed(reveals, revealed, interaction):
         description_lines.append("**Noch aufdeckbar:**")
         for spark_id, timestamp, compliment in reveals:
             compliment = replaceEmotes(compliment, interaction.guild, interaction.client)
+            emote = sparksData[compliment]["Emote"]
             try:
                 dt = datetime.fromisoformat(timestamp)
                 unix_ts = int(dt.timestamp())
             except ValueError:
                 unix_ts = 0
-            description_lines.append(f"{compliment} — <t:{unix_ts}:R> — ID `{spark_id}`")
+            description_lines.append(f"{emote}{compliment} — <t:{unix_ts}:R> — ID `{spark_id}`")
 
     if not description_lines:
         description_lines.append("Du hast aktuell keine aufdeckbaren Sparks.")
