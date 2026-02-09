@@ -3,7 +3,7 @@ import discord
 from typing import Optional
 import re
 from dataBase import *
-from main import connection
+from config import connection
 
 def CheckServerExists(serverID):
     """

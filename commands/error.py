@@ -1,6 +1,7 @@
 from discord.ext import commands
 from discord import app_commands
 import discord
+import traceback
 
 class ErrorHandler(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -35,16 +36,31 @@ class ErrorHandler(commands.Cog):
     # --------------------------
     # SLASH COMMAND ERRORS
     # --------------------------
-    async def onAppCommandError(self, interaction: discord.Interaction, error: Exception):
-        """Globaler Error-Handler für Slash-Commands."""
+    async def onAppCommandError(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
+        # Der eigentliche Fehler steckt bei Slash Commands oft in 'original'
         if isinstance(error, app_commands.CommandInvokeError):
-            original = error.original
-            if isinstance(original, discord.Forbidden):
-                await interaction.response.send_message("⚠️ Ich konnte dem Nutzer keine Nachricht schicken (vermutlich blockiert oder DMs deaktiviert).")
-                return
-            print(f"[SlashCommand-Error] {original}")
+            error = error.original
+
+        # 1. Fehlende Berechtigungen (Bot darf etwas nicht tun)
+        if isinstance(error, discord.Forbidden):
+            await interaction.response.send_message("⚠️ Ich habe nicht genug Rechte dafür!", ephemeral=True)
+
+        # 2. Command auf Cooldown
+        elif isinstance(error, app_commands.CommandOnCooldown):
+            await interaction.response.send_message(f"⏳ Chill mal. Versuch es in {error.retry_after:.2f}s erneut.", ephemeral=True)
+
+        # 3. Fehlende Berechtigungen des Nutzers
+        elif isinstance(error, app_commands.MissingPermissions):
+            await interaction.response.send_message("🚫 Du darfst diesen Command nicht nutzen!", ephemeral=True)
+
+        # 4. Der "Unbekannte" – hier fangen wir deinen 'bite' Fehler ab
         else:
-            print(f"[Unbekannter SlashCommand-Error] {error}")
+            print(f"--- FEHLER IM COMMAND '{interaction.command.name}' ---")
+            # Das hier druckt den kompletten Stacktrace (Zeilennummer, Datei, etc.)
+            traceback.print_exception(type(error), error, error.__traceback__)
+            
+            if not interaction.response.is_done():
+                await interaction.response.send_message("💥 Ein interner Fehler ist aufgetreten.", ephemeral=True)
 
 
 async def setup(bot: commands.Bot):
