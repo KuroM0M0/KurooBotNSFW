@@ -1,25 +1,21 @@
 import logging
-from dotenv import load_dotenv
 import os
 import discord
 import json
 from discord.ext import commands
-from discord import Locale, app_commands
+from discord import Locale
+from config import BotToken
 import asyncio
-from dataBase import createConnection
 
-load_dotenv()
+
 logging.basicConfig(level=logging.WARNING)
 
-BotToken = os.getenv("BotToken")
-KuroID = os.getenv("KuroID")
-Kurocord = os.getenv("Kurocord")
-BotID = int(os.getenv("BotID"))
+
 intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
 bot = commands.Bot(command_prefix="-", intents=intents)
-connection = createConnection()
+
 
 
 #Übersetzungen laden

@@ -57,7 +57,7 @@
         "sparkIntensity": {
             "title": "Which Sparks do you want to receive?",
             "text": "text Test",
-            "description": "beschreibungs Test",
+            "placeholder": "beschreibungs Test",
             "options": {
                 "softDesc": "Bewunderung, Fantasy, Smile, Blush",
                 "spicyDesc": "Sexy, Tease, Lippen, Wink, Shy Flirt + all above",

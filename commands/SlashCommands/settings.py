@@ -2,7 +2,8 @@ from dataBase import *
 import discord
 from discord import ButtonStyle, ui, Locale, app_commands
 from discord.ext import commands
-from main import connection, translate
+from main import translate
+from config import connection
 
 #secondary, grey, gray = grau
 #primary, blurple = blau
@@ -206,7 +207,7 @@ class SparkIntensityModal(discord.ui.Modal):
         
 
         self.select = discord.ui.Select(
-            placeholder=translate(locale, "modal.sparkIntensity.text"),
+            placeholder=translate(locale, "modal.sparkIntensity.placeholder"),
             options=[
                 discord.SelectOption(label="Soft", value="Soft", description=translate(locale, "modal.sparkIntensity.options.softDesc"), emoji="🔞"),
                 discord.SelectOption(label="Spicy", value="Spicy", description=translate(locale, "modal.sparkIntensity.options.spicyDesc"), emoji="🔞"),
@@ -215,7 +216,6 @@ class SparkIntensityModal(discord.ui.Modal):
 
         self.Einstellung = discord.ui.Label(
             text = translate(locale, "modal.sparkIntensity.text"),
-            description = translate(locale, "modal.sparkIntensity.description"),
             component = self.select)
         self.add_item(self.Einstellung)
 

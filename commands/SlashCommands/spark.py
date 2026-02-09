@@ -3,7 +3,8 @@ import json
 import random
 from discord.ext import commands
 from discord import Interaction, Locale, app_commands
-from main import connection, BotID, translate
+from main import translate
+from config import connection, BotID
 from commands.SlashCommands.settings import CheckUserIsInSettings
 from dataBase import *
 from Methoden import *
@@ -34,9 +35,9 @@ class Spark(commands.Cog):
         CheckUserIsInSettings(userID)
         CheckUserIsInSettings(targetID)
         CheckServerExists(interaction.guild_id)
-        if CheckPossibleSparks(userID) == False:
-            await interaction.response.send_message(translate(interaction.locale, "command.sparknsfw.noSparksLeft"), ephemeral=True)
-            return
+        #if CheckPossibleSparks(userID) == False:
+        #    await interaction.response.send_message(translate(interaction.locale, "command.sparknsfw.noSparksLeft"), ephemeral=True)
+        #    return
 
         Sparktyp = getSparkIntensity(connection, targetID) #für später wichtig im Modal, um abzufragen welche Sparks angezeigt werden sollen
         AnonymSettings = getServerAnonymSpark(connection, serverID)
@@ -116,7 +117,7 @@ class SparkModal(discord.ui.Modal):
         kompliment = self.select.values[0]
         serverID = interaction.guild_id
         UserExists(str(interaction.user.id))
-        removePossibleSpark(interaction.user.id)
+        #removePossibleSpark(interaction.user.id)
         
 
         if self.anonym.values[0] == "yes":

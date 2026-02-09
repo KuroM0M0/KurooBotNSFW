@@ -3,19 +3,24 @@ import textwrap
 from discord import app_commands
 from discord.ext import commands
 from Methoden import *
-from main import connection
 
 
 
 class Help(commands.Cog):
+    async def command_autocomplete(self, interaction: discord.Interaction, current: str,) -> list[app_commands.Choice[str]]:
+        befehle = ['setup', 'settings', 'spark']
+        
+        # Filtert die Liste basierend auf dem, was der Nutzer bereits tippt
+        return [
+            app_commands.Choice(name=befehl, value=befehl)
+            for befehl in befehle if current.lower() in befehl.lower()
+        ]
+    
     @app_commands.command(name="help", description="Zeigt dir alle Befehle an")
-    async def help(interaction: discord.Interaction, command: str = None):
+    async def help(self, interaction: discord.Interaction, command: str = None):
         if interaction.guild is not None:
             serverID = str(interaction.guild.id)
-            channelID = str(interaction.channel.id)
-            CheckServerExists(connection, serverID)
-            if serverID is not None:
-                await CheckSparkChannel(connection, serverID, channelID, interaction)
+            CheckServerExists(serverID)
 
         if command is None:
             embed = discord.Embed(
@@ -38,12 +43,16 @@ class Help(commands.Cog):
             await helpStreak(interaction)
         elif command == "reveal":
             await helpReveal(interaction)
-        elif command == "admin":
-            await helpAdmin(interaction)
+        elif command == "setup":
+            await helpSetup(interaction)
         elif command == "vote":
             await helpVote(interaction)
         elif command == "shop":
             await helpShop(interaction)
+
+    @help.autocomplete('command')
+    async def help_autocomplete(self, interaction: discord.Interaction, current: str):
+        return await self.command_autocomplete(interaction, current)
 
 
 
@@ -75,11 +84,11 @@ cmdDescription = textwrap.dedent(
 async def helpSpark(interaction):
     embed = discord.Embed(
         color=0x005b96)
-    text = textwrap.dedent( "\n\n Du kannst täglich **einer** Person ein anonymes Kompliment geben. \n\n"
+    text = textwrap.dedent( "\n\n Du kannst täglich **einer** Person einen anonymen Spark schicken. \n\n"
                             "**Wenn du oder der Server Premium hat,** kannst du **unendlich viele** verwenden. "
-                            "\n\n**/spark (Person)**\nDamit kannst du einer Person ein Anonymes kompliment machen. \n"
-                            "Wenn du bei dem Feld Anonym, 'Nein' auswählst, sieht jeder dass der Spark von dir kommt.\n"
-                            "Wenn du möchtest, dass nur der Empfänger sieht von wem es kommt, dann wähle 'Halb' aus.")
+                            "\n\n**/sparknsfw (Person)**\n" "Es öffnet sich ein Formular in dem du die Art des Sparks und die Anonymität einstellen kannst.\n"
+                            "Wenn du bei dem Feld Anonym 'Nein' auswählst, **sieht jeder dass der Spark von dir kommt.**\n"
+                            "Wenn du möchtest, dass **nur der Empfänger** sieht von wem es kommt, **dann wähle 'Halb'** aus.")
     embed.add_field(
         name="Hilfe zu /spark: ",
         value=text,
@@ -105,8 +114,8 @@ async def helpSettings(interaction):
     embed = discord.Embed(
         color=0x005b96)
     text = textwrap.dedent("Hier kannst du deine Einstellungen anpassen. \n"
-                           "Es wird dir angezeigt was deine aktuellen Einstellungen sind."
-                           "Wenn du kein Premium hast, hast du nicht die Option alles einzustellen. \n"
+                           "Es wird dir angezeigt was deine aktuellen Einstellungen sind.\n"
+                           "Wenn du **kein Premium** hast, hast du **nicht die Option alles einzustellen**. \n"
                            "Was du nicht einstellen kannst, ist unter 'Premium Einstellungen' aufgelistet.")
     embed.add_field(
         name="Hilfe zu /settings: ",
@@ -148,15 +157,16 @@ async def helpReveal(interaction):
     await interaction.response.send_message(embed=embed)
 
 
-async def helpAdmin(interaction):
+async def helpSetup(interaction):
     embed = discord.Embed(
          color=0x005b96)
     text = textwrap.dedent("Um einen Channel festzulegen, in dem der Bot verwendet werden darf,"
                             "kannst du den Befehl **-setNSFWSparkChannel** in dem gewünschten Kanal eingeben."
                             "Es werden Administrator Berechtigungen dafür benötigt."
                             "Wenn kein Channel festgelegt wurde, funktioniert der Bot überall.\n\n"
-                            "Es kann zusätzlich noch **-setNewsletterChannel** "
-                            "verwendet werden, um vom Bot alle Update Infos zu bekommen.")
+                            "Mit **-settings** kannst du Serverweite Einstellungen treffen."
+                            "\n Aktuell kannst du damit einstellen, was bei dem Anonym Feld ausgewählt werden kann."
+                            "\n 0 = Ja/Halb/Nein   |   1 = Ja/Halb")
     embed.add_field(
         name="Hilfe zur Einrichtung vom Bot: ",
         value=text,

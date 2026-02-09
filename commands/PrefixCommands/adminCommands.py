@@ -1,6 +1,5 @@
-import discord
 from discord.ext import commands
-from main import connection
+from config import connection
 from dataBase import *
 from Methoden import *
 

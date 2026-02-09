@@ -56,8 +56,8 @@
         },
         "sparkIntensity": {
             "title": "Welche Sparks möchtest du erhalten können?",
-            "text": "text Test",
-            "description": "beschreibungs Test",
+            "text": "Welche Sparks möchtest du erhalten?",
+            "placeholder": "Auswählen...",
             "options": {
                 "softDesc": "Bewunderung, Fantasy, Smile, Blush",
                 "spicyDesc": "Sexy, Tease, Lippen, Wink, Shy Flirt + alles was Soft ist",
@@ -112,10 +112,45 @@
             "text": "{userName} flirtet schüchtern mit dir… und hofft, dass du es bemerkst 🥰",
             "name": "Flirt"
         },
-        "bite": {
-            "anonym": ",  jemand würde dir jetzt zu gern in den Hals beißen <:Bite:1430608155204784128>",
+        "Bite": {
+            "anonym": ", jemand würde dir jetzt zu gern in den Hals beißen <:Bite:1430608155204784128>",
             "text": ",  {userName} würde dir jetzt zu gern in den Hals beißen <:Bite:1430608155204784128>",
             "name": "Bite <:Bite:1430608155204784128>"
+        },
+        "Bite Me": {
+            "anonym": ", jemand würde gern von dir gebissen werden <:Bite:1430608155204784128>",
+            "text": ",  {userName} will von dir gebissen werden <:Bite:1430608155204784128>",
+            "name": "Bite <:Bite:1430608155204784128>"
+        },
+        "Spank": {
+            "anonym": ", jemand würde dir jetzt zu gern den Hintern versohlen 🍑",
+            "text": ",  {userName} möchte dir den Hintern versohlen 🍑",
+            "name": "Spank 🍑"
+        },
+        "Spank Me": {
+            "anonym": ", jemand möchte von dir den Hintern versohlt bekommen 🍑",
+            "text": ",  {userName} möchte von dir den Hintern versohlt bekommen 🍑",
+            "name": "Spank 🍑"
+        },
+        "Choke": {
+            "anonym": ", jemand denkt daran, dir sanft den Atem zu rauben… und das Herz schneller schlagen zu lassen 🖤",
+            "text": ", {userName} denkt daran, dir sanft den Atem zu rauben… und das Herz schneller schlagen zu lassen 🖤",
+            "name": "Choke 🖤"
+        },
+        "Choke Me": {
+            "anonym": ", jemand wünscht sich, dass du sanft seine Luft kontrollierst… und dabei das Verlangen steigst 🖤",
+            "text": ", {userName} wünscht sich, dass du sanft seine Luft kontrollierst… und dabei das Verlangen steigst 🖤",
+            "name": "Choke 🖤"
+        },
+        "Touch": {
+            "anonym": ", jemand wünscht sich, dass du seine Haut oberall spürst ✋🔥",
+            "text": ", {userName} wünscht sich, dass du seine Haut oberall spürst ✋🔥",
+            "name": "Touch ✋🔥"
+        },
+        "Touch Me": {
+            "anonym": ", jemand wünscht sich, dass du seine Haut oberall spürst ✋🔥",
+            "text": ", {userName} wünscht sich, dass du seine Haut oberall spürst ✋🔥",
+            "name": "Touch ✋🔥"
         }
     },
     "yes": "Ja ✅",

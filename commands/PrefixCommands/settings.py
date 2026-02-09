@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from dataBase import *
-from main import connection
+from config import connection
 from Methoden import CheckServerExistsInSettings
 
 

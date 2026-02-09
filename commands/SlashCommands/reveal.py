@@ -4,7 +4,7 @@ from discord import app_commands, ui
 from discord.ext import commands
 from Methoden import replaceEmotes, getUserName
 from dataBase import *
-from main import connection 
+from config import connection 
 
 
 class RevealCog(commands.Cog):

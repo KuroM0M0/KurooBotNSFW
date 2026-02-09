@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from main import connection
+from config import connection
 from dataBase import *
 from Methoden import *
 
@@ -28,6 +28,17 @@ class KuroCommands(commands.Cog):
         targetID = member.id
         await ctx.send(f"{member} hat nun kein Premium mehr!")
         resetPremium(connection, targetID)
+
+
+    @commands.command()
+    @commands.is_owner()
+    async def reload(self, ctx, extension):
+        bot = ctx.bot
+        try:
+            await bot.reload_extension(f"{extension}")
+            await ctx.send(f"✅ Modul `{extension}` wurde neu geladen!")
+        except Exception as e:
+            await ctx.send(f"❌ Fehler: {e}")
 
 
 async def setup(bot):
