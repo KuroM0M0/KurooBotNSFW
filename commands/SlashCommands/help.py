@@ -2,7 +2,7 @@ import discord
 import textwrap
 from discord import app_commands
 from discord.ext import commands
-from Methoden import *
+from functions.Methoden import *
 
 
 

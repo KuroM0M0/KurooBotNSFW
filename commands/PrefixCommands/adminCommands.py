@@ -1,7 +1,7 @@
 from discord.ext import commands
 from config import connection
-from dataBase import *
-from Methoden import *
+from functions.dataBase import *
+from functions.Methoden import *
 
 class AdminCommands(commands.Cog):
     @commands.command(name="setNSFWChannel")

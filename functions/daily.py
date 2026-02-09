@@ -1,7 +1,7 @@
 import discord
 from discord.ext import tasks, commands
 import datetime
-from dataBase import addPossibleSparksForAllUsers
+from functions.dataBase import addPossibleSparksForAllUsers
 from main import connection
 
 class Daily(commands.Cog):

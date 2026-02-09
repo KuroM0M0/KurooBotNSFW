@@ -1,4 +1,4 @@
-from dataBase import *
+from functions.dataBase import *
 import discord
 from discord import ButtonStyle, ui, Locale, app_commands
 from discord.ext import commands

@@ -1,8 +1,8 @@
 import discord
 from discord.ext import commands
-from dataBase import *
+from functions.dataBase import *
 from config import connection
-from Methoden import CheckServerExistsInSettings
+from functions.Methoden import CheckServerExistsInSettings
 
 
 

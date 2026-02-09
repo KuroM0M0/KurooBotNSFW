@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from dataBase import createConnection
+from functions.dataBase import createConnection
 
 connection = createConnection()
 load_dotenv()

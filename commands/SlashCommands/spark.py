@@ -6,8 +6,8 @@ from discord import Interaction, Locale, app_commands
 from main import translate
 from config import connection, BotID
 from commands.SlashCommands.settings import CheckUserIsInSettings
-from dataBase import *
-from Methoden import *
+from functions.dataBase import *
+from functions.Methoden import *
 
 with open("sparks.json", "r", encoding="utf8") as f:
     sparksData = json.load(f)

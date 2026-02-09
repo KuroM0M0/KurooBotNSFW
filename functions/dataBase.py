@@ -1568,7 +1568,7 @@ def setVotePoints(connection, userID):
         cursor = connection.cursor()
         try:
             cursor.execute('''  UPDATE User
-                                SET VotePunkte = VotePunkte + 1
+                                SET VotePoints = VotePoints + 1
                                 WHERE UserID = ?''',
                                 (userID,))
             connection.commit()
@@ -1584,7 +1584,7 @@ def getVotePoints(connection, userID):
     if connection is not None:
         cursor = connection.cursor()
         try:
-            cursor.execute('''  SELECT VotePunkte
+            cursor.execute('''  SELECT VotePoints
                                 FROM User
                                 WHERE UserID = ?''',
                                 (userID,))
@@ -1794,12 +1794,12 @@ def getAllShopItems(connection):
 
 
 
-def setVotePunkte(connection, targetID, Punkte):
+def setVotePoints(connection, targetID, Punkte):
     if connection is not None:
         cursor = connection.cursor()
         try:
             cursor.execute('''  UPDATE User
-                                SET VotePunkte = ?
+                                SET VotePoints = ?
                                 WHERE UserID = ?''',
                                 (Punkte, targetID))
             connection.commit()
@@ -1811,17 +1811,17 @@ def setVotePunkte(connection, targetID, Punkte):
 
 
 
-def updateVotePunkte(connection, targetID, Punkte):
+def updateVotePoints(connection, targetID, Punkte):
     if connection is not None:
         cursor = connection.cursor()
         try:
             cursor.execute('''  UPDATE User
-                                SET VotePunkte = VotePunkte + ?
+                                SET VotePoints = VotePoints + ?
                                 WHERE UserID = ?''',
                                 (Punkte, targetID))
             connection.commit()
         except sqlite3.Error as e:
-            print(f"Fehler beim setzen der VotePunkte: {e}")
+            print(f"Fehler beim setzen der VotePoints: {e}")
     else:
         print("Keine Datenbankverbindung verführbar")
 

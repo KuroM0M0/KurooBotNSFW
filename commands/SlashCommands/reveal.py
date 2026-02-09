@@ -3,8 +3,8 @@ import os
 from datetime import datetime
 from discord import app_commands, ui
 from discord.ext import commands
-from Methoden import replaceEmotes, getUserName
-from dataBase import *
+from functions.Methoden import replaceEmotes, getUserName
+from functions.dataBase import *
 from config import connection 
 
 

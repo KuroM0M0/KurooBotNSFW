@@ -2,7 +2,7 @@ import asyncio
 import discord
 from typing import Optional
 import re
-from dataBase import *
+from functions.dataBase import *
 from config import connection
 
 def CheckServerExists(serverID):
