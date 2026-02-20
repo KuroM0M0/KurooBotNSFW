@@ -1,0 +1,5 @@
+StreakPoint = "<:Streakpunkt:1430554386043506803>"
+VotePoint = "<:Votepunkt:1430554387352260638>"
+Schaufel = "<:Schaufel:1430554359954931722>"
+Ping = "<:PeepoPing:1430554358529130686>"
+Discord = "<:Discord:1430554356725317693>"
