@@ -4,7 +4,34 @@ from typing import Optional
 import re
 from functions.dataBase import *
 from config import connection
+from datetime import date, timedelta
 
+
+def procesStreak(user_id, connection):
+    today = date.today().isoformat()
+    yesterday = (date.today() - timedelta(days=1)).isoformat()
+    
+    lastPointAdded = getLastStreakPointAdded(connection, user_id)
+    streak = getStreak(connection, user_id)
+
+    # 1. Check: Schon heute ausgeführt?
+    if lastPointAdded == today:
+        return
+
+    # 2. Check: Streak fortsetzen oder Reset?
+    if lastPointAdded == yesterday:
+        new_streak = streak + 1
+        updateStreak(connection, user_id)
+        setLastStreakPointAdded(connection, user_id, today)
+    else:
+        resetStreak(connection, user_id)
+        new_streak = 1
+        setLastStreakPointAdded(connection, user_id, today)
+
+    # 4. Bonus-Logik mit Modulo
+    if new_streak % 3 == 0:
+        updateStreakPoints(connection, user_id)
+        
 def CheckServerExists(serverID):
     """
     Prüft ob Server in der Datenbank existiert, wenn nicht wird er hinzugefügen

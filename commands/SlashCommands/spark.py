@@ -35,9 +35,9 @@ class Spark(commands.Cog):
         CheckUserIsInSettings(userID)
         CheckUserIsInSettings(targetID)
         CheckServerExists(interaction.guild_id)
-        #if CheckPossibleSparks(userID) == False:
-        #    await interaction.response.send_message(translate(interaction.locale, "command.sparknsfw.noSparksLeft"), ephemeral=True)
-        #    return
+        if CheckPossibleSparks(userID) == False:
+            await interaction.response.send_message(translate(interaction.locale, "command.sparknsfw.noSparksLeft"), ephemeral=True)
+            return
 
         Sparktyp = getSparkIntensity(connection, targetID) #für später wichtig im Modal, um abzufragen welche Sparks angezeigt werden sollen
         AnonymSettings = getServerAnonymSpark(connection, serverID)
@@ -117,7 +117,7 @@ class SparkModal(discord.ui.Modal):
         kompliment = self.select.values[0]
         serverID = interaction.guild_id
         UserExists(str(interaction.user.id))
-        #removePossibleSpark(interaction.user.id)
+        removePossibleSpark(interaction.user.id)
         
 
         if self.anonym.values[0] == "yes":
@@ -139,8 +139,9 @@ class SparkModal(discord.ui.Modal):
         embed.set_thumbnail(url=self.target.display_avatar.url)
         embed.set_footer(text=f"Spark ID: {getSparkID(connection)}")
         await interaction.response.send_message(translate(interaction.locale, "modal.spark.onSubmit", targetName=targetName), ephemeral=True)
+        procesStreak(interaction.user.id, connection)
 
-        if getPingSetting(connection, interaction.user.id):
+        if getPingSetting(connection, targetID):
             await interaction.followup.send(embed=embed, content=f"{target.mention}")
         else:
             await interaction.followup.send(embed=embed)
