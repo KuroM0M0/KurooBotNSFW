@@ -35,7 +35,7 @@
                 },
                 "toggle": {
                     "on": "Aktiv ✅",
-                    "off": "Deaktiv ❌"
+                    "off": "Deaktiviert ❌"
                 }
             }
         }
@@ -64,6 +64,12 @@
                 "explicitDesc": "Jeder darf dir alle Sparks schicken."
             },
             "error": "Fehler: {error}"
+        },
+        "brille": {
+            "title": "Welchen Spark möchtest du aufdecken?",
+            "description": "Gib die Nummer an, die du mit /reveal sehen kannst.",
+            "placeholder": "Gib hier die SparkID ein",
+            "onSubmit": "Der Spark wurde erfolgreich an {targetName} gesendet!"
         }
     },
     "sparks": {
@@ -155,5 +161,5 @@
     },
     "yes": "Ja ✅",
     "no": "Nein ❌",
-    "half": "Halb ⚠️"
+    "half": "Aufdeckbar ⚠️"
 }

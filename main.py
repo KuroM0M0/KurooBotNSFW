@@ -108,6 +108,10 @@ async def loadCommands():
     await bot.load_extension("commands.SlashCommands.help")
     await bot.load_extension("commands.error")
     await bot.load_extension("commands.SlashCommands.reveal")
+    await bot.load_extension("commands.SlashCommands.use")
+    await bot.load_extension("commands.SlashCommands.shop")
+    await bot.load_extension("commands.SlashCommands.feedback")
+    #await bot.load_extension("commands.SlashCommands.vote")
 
 
 

@@ -31,191 +31,6 @@ def closeConnection(connection):
 
 
 
-def checkCooldown(connection, user_id, cooldown_duration):
-    if connection is not None:
-        cursor = connection.cursor()
-        try: #datetime.fromisoformat(data["cooldowns"][user_id])
-            cursor.execute('''  SELECT SparkTimestamp 
-                                FROM User 
-                                WHERE UserID = ?''', 
-                                (user_id,))
-            result = cursor.fetchone()
-            if result and result[0]:
-                last_used = datetime.fromisoformat(result[0])
-                if datetime.now() < last_used + timedelta(hours=cooldown_duration):
-                    return False
-            return True
-        except sqlite3.Error as e:
-            print(f"Fehler beim Überprüfen des Cooldowns: {e}")
-            return False
-    else:
-        print("Keine Datenbankverbindung verfügbar.")
-        return False
-
-
-
-
-def updateCooldown(connection, user_id):
-    if connection is not None:
-        cursor = connection.cursor()
-        try:
-            now = datetime.now().date().isoformat()
-            cursor.execute('''  UPDATE User 
-                                SET SparkTimestamp = ?
-                                WHERE UserID = ?''', 
-                                (now, user_id))
-            connection.commit()
-        except sqlite3.Error as e:
-            print(f"Fehler beim Aktualisieren des Cooldowns: {e}")
-    else:
-        print("Keine Datenbankverbindung verfügbar.")
-
-
-
-
-def checkHugPatCooldown(connection, user_id, cooldown_duration_hours):
-    """Gibt True zurück, wenn der Befehl erlaubt ist, sonst False."""
-    if connection is None:
-        print("Keine Datenbankverbindung verfügbar.")
-        return False
-
-    cursor = connection.cursor()
-    try:
-        cursor.execute('SELECT HugPatTimestamp FROM User WHERE UserID = ?', (user_id,))
-        row = cursor.fetchone()
-        if not row:
-            return True
-
-        ts = row[0]
-        if ts in (None, '0', ''):
-            return True
-
-        try:
-            last_used = datetime.fromisoformat(ts)
-        except ValueError:
-            # Falls das Format unerwartet ist, erlauben (oder alternativ: blockieren)
-            print(f"Ungültiges Timestamp-Format in DB: {ts}")
-            return True
-
-        now = datetime.now()
-        if now < last_used + timedelta(hours=cooldown_duration_hours):
-            return False
-        return True
-    except sqlite3.Error as e:
-        print(f"Fehler beim Überprüfen des HugPat-Cooldowns: {e}")
-        return False
-
-
-
-
-def updateHugPatCooldown(connection, userID):
-    """Speichert den kompletten Timestamp (Datum+Uhrzeit) als ISO-String."""
-    if connection is None:
-        print("Keine Datenbankverbindung verfügbar.")
-        return
-
-    cursor = connection.cursor()
-    try:
-        now_iso = datetime.now().isoformat()
-        cursor.execute('UPDATE User SET HugPatTimestamp = ? WHERE UserID = ?', (now_iso, userID))
-        connection.commit()
-    except sqlite3.Error as e:
-        print(f"Fehler beim Aktualisieren des HugPat-Cooldowns: {e}")
-
-
-
-
-def getNextHugAvailable(connection, userID, cooldownHours):
-    """Gibt die nächste Verfügbarkeits-<datetime> zurück, falls Cooldown noch aktiv ist.
-    Ansonsten None.
-
-    Args:
-        userID: str
-        cooldownHours: int/float
-
-    Returns:
-        datetime | None
-    """
-    if connection is None:
-        return None
-
-    try:
-        cur = connection.cursor()
-        cur.execute('SELECT HugPatTimestamp FROM User WHERE UserID = ?', (userID,))
-        row = cur.fetchone()
-        if not row:
-            return None
-
-        ts = row[0]
-        if ts in (None, '0', ''):
-            return None
-
-        try:
-            last_used = datetime.fromisoformat(ts)
-        except Exception:
-            # Ungültiges Format -> treat as no cooldown
-            return None
-
-        next_available = last_used + timedelta(hours=float(cooldownHours))
-        now = datetime.now()
-        if now < next_available:
-            return next_available
-        return None
-
-    except sqlite3.Error as e:
-        print(f"DB-Fehler in getNextHugAvailable: {e}")
-        return None
-
-
-
-
-def updateHugPatUses(connection, user_id, max_uses):
-    if connection is None:
-        print("Keine Datenbankverbindung verfügbar.")
-        return False
-
-    cursor = connection.cursor()
-    try:
-        now = datetime.now().date().isoformat()
-        # Prüfen, ob der User existiert
-        cursor.execute('''  SELECT HugPatUses, HugPatLastReset 
-                            FROM User 
-                            WHERE UserID = ?''', 
-                            (user_id,))
-        result = cursor.fetchone()
-
-        if result:
-            count, last_reset = result
-            if last_reset != now:  # Neuer Tag → Reset
-                count = 0
-                last_reset = now
-
-            if count >= max_uses:
-                return False 
-
-            count += 1  # Nutzung erhöhen
-            cursor.execute('''  UPDATE User 
-                                SET HugPatUses = ?, HugPatLastReset = ? 
-                                WHERE UserID = ?''',
-                                (count, last_reset, user_id))
-            connection.commit()
-            return True 
-        else:
-            # Falls der User nicht existiert, neu anlegen
-            count = 1
-            last_reset = now
-            cursor.execute('''  INSERT INTO User 
-                                (UserID, HugPatUses, HugPatLastReset) 
-                                VALUES (?, ?, ?)''',
-                                (user_id, count, last_reset))
-        connection.commit()
-        return True
-
-    except sqlite3.Error as e:
-        print(f"Fehler beim Aktualisieren der HugPat-Nutzung: {e}")
-        return False
-
-
 
 def getCompliments(connection, userID):
     """
@@ -404,10 +219,9 @@ def getStreak(connection, userID):
                                 WHERE UserID = ?''',
                                 (userID,))
             result = cursor.fetchone()
-            if result and result[0]:
-                return result[0]
-            else:
-                print(f"Keine Streak gesetzt: {userID}")
+            if result is None:
+                return None
+            return result[0]
         except sqlite3.Error as e:
             print(f"Fehler beim Abrufen der Streak: {e}")
     else:
@@ -489,6 +303,23 @@ def updateStreakPoints(connection, userID):
     else:
         print("Keine Datenbankverbindung verfügbar.")
         return {}
+    
+
+
+
+def setStreakPoints(connection, userID, Punkte):
+    if connection is not None:
+        cursor = connection.cursor()
+        try:
+            cursor.execute('''  UPDATE User
+                                SET StreakPoints = ?
+                                WHERE UserID = ?''',
+                                (Punkte, userID))
+            connection.commit()
+        except sqlite3.Error as e:
+            print(f"Fehler beim setzen der StreakPunkte: {e}")
+    else:
+        print("Keine Datenbankverbindung verführbar")
 
 
 
@@ -610,43 +441,39 @@ def insertLogs(connection, Timestamp, UserID, TargetID, ServerID, Spark, Typ, An
 
 
 
-def getCooldown(connection, userID):
-    """
-    Retrieves the cooldown timestamp for a specific user.
-
-    This function queries the database for the 'SparkTimestamp' of the user
-    with the given userID. If the user exists, it returns the timestamp as 
-    a string. If the user does not exist or an error occurs, it returns 0.
-
-    Parameters
-    ----------
-    connection : sqlite3.Connection
-        The database connection to use.
-    userID : str
-        The ID of the user to retrieve the cooldown for.
-
-    Returns
-    -------
-    str or int
-        The timestamp of the last cooldown as a string, or 0 if the user
-        does not exist or an error occurs.
-    """
-
+def getLastStreakPointAdded(connection, userID):
     if connection is not None:
         cursor = connection.cursor()
         try:
-            cursor.execute('''  SELECT SparkTimestamp
+            cursor.execute('''  SELECT lastStreakPointAdded
                                 FROM User
                                 WHERE userID = ?''',
                                 (userID,))
             result = cursor.fetchone()
             if result is None:
-                return 0
+                return None
             return result[0]
         except sqlite3.Error as e:
-            print(f"Fehler beim Abrufen des Cooldowns: {e}")
+            print(f"Fehler beim Abrufen vom lastStreakPointAdded: {e}")
     else:
         print("Keine Datenbankverbindung verfügbar")
+
+
+
+
+def setLastStreakPointAdded(connection, userID, lastStreakPointAdded):
+    if connection is not None:
+        cursor = connection.cursor()
+        try:
+            cursor.execute('''  UPDATE User
+                                SET lastStreakPointAdded = ?
+                                WHERE userID = ?''',
+                                (lastStreakPointAdded, userID))
+            connection.commit()
+        except sqlite3.Error as e:
+            print(f"Fehler beim setzen vom lastStreakPointAdded: {e}")
+    else:
+        print("Keine Datenbankverbindung verführbar")
 
 
 
@@ -1366,9 +1193,9 @@ def getSparkReveal(connection, SparkID):
     if connection is not None:
         cursor = connection.cursor()
         try:
-            cursor.execute('''  SELECT UserName, ServerName
+            cursor.execute('''  SELECT UserID
                                 FROM Logs
-                                WHERE ID = ? AND Reveal = 1''',
+                                WHERE ID = ? AND Anonym != 1''',
                                 (SparkID,))
             result = cursor.fetchone()
             if result is None:
@@ -1699,6 +1526,8 @@ def getIsRevealed(connection, SparkID):
                                 WHERE ID = ?''',
                                 (SparkID,))
             result = cursor.fetchone()
+            if result is None:
+                return False
             return result[0]
         except sqlite3.Error as e:
             print(f"Fehler beim selecten von Reveal: {e}")
@@ -1941,6 +1770,8 @@ def getItemIDByName(connection, name):
                                 WHERE Name = ?''',
                                 (name,))
             result = cursor.fetchone()
+            if result is None:
+                return None
             return result[0]
         except sqlite3.Error as e:
             print(f"Fehler beim selecten von ItemID: {e}")

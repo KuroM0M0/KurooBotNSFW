@@ -41,6 +41,22 @@ class KuroCommands(commands.Cog):
             await ctx.send(f"❌ Fehler: {e}")
 
 
+    @commands.command()
+    @commands.is_owner()
+    async def setStreakPunkte(self, ctx, member: discord.Member, Punkte: int):
+        targetID = member.id
+        await ctx.send(f"{member} hat nun {Punkte} Streak Punkte!")
+        setStreakPoints(connection, targetID, Punkte)
+
+
+    @commands.command()
+    @commands.is_owner()
+    async def setVotePunkte(self, ctx, member: discord.Member, Punkte: int):
+        targetID = member.id
+        await ctx.send(f"{member} hat nun {Punkte} Vote Punkte!")
+        setVotePoints(connection, targetID, Punkte)
+
+
 async def setup(bot):
     await bot.add_cog(KuroCommands(bot))
     print("KuroCommands geladen ✅")
