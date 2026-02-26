@@ -23,3 +23,4 @@ class Daily(commands.Cog):
 
 async def setup(bot):
     await bot.add_cog(Daily(bot))
+    print("Daily geladen ✅")

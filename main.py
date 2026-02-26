@@ -18,11 +18,20 @@ bot = commands.Bot(command_prefix="-", intents=intents)
 
 
 
+def loadLocalizations():
+    global localizations
+    data = {}
+    for language in ["de", "en"]:
+        with open(os.path.join("localization", f"{language}.json"), encoding="utf-8") as f:
+            data[language] = json.load(f)
+    localizations = data
+
+
 #Übersetzungen laden
 localizations = {}
-for language in ["de", "en"]:
-    with open(os.path.join("localization", f"{language}.json"), encoding="utf-8") as f:
-        localizations[language] = json.load(f)
+#for language in ["de", "en"]:
+#    with open(os.path.join("localization", f"{language}.json"), encoding="utf-8") as f:
+#        localizations[language] = json.load(f)
 
 #Mapping von Discord Locales zu den JSON-Keys
 locale_map = {
@@ -42,6 +51,7 @@ def translate(locale: Locale, path: str, **kwargs):
     Wenn der Schlüssel nicht vorhanden ist, wird ein KeyError ausgelöst.
     Falls der Wert kein String oder Dict ist, wird er einfach als String zurückgegeben.
     """
+    loadLocalizations()
     parts = path.split(".")
     lang = locale_map.get(locale, "en")  # fallback auf Englisch
     value = localizations[lang]

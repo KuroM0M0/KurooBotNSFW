@@ -1790,6 +1790,8 @@ def getSparkIntensity(connection, userID):
                                 WHERE UserID = ?''',
                                 (userID,))
             result = cursor.fetchone()
+            if result is None:
+                return "Soft"
             return result[0]
         except sqlite3.Error as e:
             print(f"Fehler beim selecten von SparktypeSetting: {e}")

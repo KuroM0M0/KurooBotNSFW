@@ -53,7 +53,7 @@ class ErrorHandler(commands.Cog):
         elif isinstance(error, app_commands.MissingPermissions):
             await interaction.response.send_message("🚫 Du darfst diesen Command nicht nutzen!", ephemeral=True)
 
-        # 4. Der "Unbekannte" – hier fangen wir deinen 'bite' Fehler ab
+        # 4. Der "Unbekannte" Fehler
         else:
             print(f"--- FEHLER IM COMMAND '{interaction.command.name}' ---")
             # Das hier druckt den kompletten Stacktrace (Zeilennummer, Datei, etc.)
