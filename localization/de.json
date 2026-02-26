@@ -4,7 +4,8 @@
             "name": "SparkNSFW",
             "description": "Sende einen Spark.",
             "error": "Du kannst in diesem Channel keine Sparks verschicken!",
-            "noSparksLeft": "Du hast keine Sparks mehr. Versuch es morgen nochmal!"
+            "noSparksLeft": "Du hast keine Sparks mehr. Versuch es morgen nochmal!",
+            "sparkDeactive": "Deine ausgewählte Person möchte keine Sparks erhalten."
         },
         "settings": {
             "name": "Einstellungen",
@@ -59,6 +60,8 @@
             "text": "Welche Sparks möchtest du erhalten?",
             "placeholder": "Auswählen...",
             "options": {
+                "noName": "Keine Sparks",
+                "noDesc": "Du kannst nicht gesparkt werden.",
                 "softDesc": "Bewunderung, Fantasy, Smile, Blush",
                 "spicyDesc": "Sexy, Tease, Lippen, Wink, Shy Flirt + alles was Soft ist",
                 "explicitDesc": "Jeder darf dir alle Sparks schicken."
@@ -74,8 +77,8 @@
     },
     "sparks": {
         "Blush": {
-            "anonym": ", jemand traut sich kaum, dich anzusprechen… aus Angst, rot zu werden 🫣",
-            "text": ", {userName} traut sich kaum, dich anzusprechen… aus Angst, rot zu werden 🫣",
+            "anonym": ", jemand traut sich kaum dich anzusprechen… aus Angst zu erröten 🫣",
+            "text": ", {userName} traut sich kaum dich anzusprechen… aus Angst zu erröten 🫣",
             "name": "Blush <:HugeBlush:1430581995406229584>"
         },
         "Smile": {
@@ -149,13 +152,13 @@
             "name": "Choke 🖤"
         },
         "Touch": {
-            "anonym": ", jemand wünscht sich, dass du seine Haut oberall spürst ✋🔥",
-            "text": ", {userName} wünscht sich, dass du seine Haut oberall spürst ✋🔥",
+            "anonym": ", jemand wünscht sich, dass du seine Haut überall spürst ✋🔥",
+            "text": ", {userName} wünscht sich, dass du seine Haut überall spürst ✋🔥",
             "name": "Touch ✋🔥"
         },
         "Touch Me": {
-            "anonym": ", jemand wünscht sich, dass du seine Haut oberall spürst ✋🔥",
-            "text": ", {userName} wünscht sich, dass du seine Haut oberall spürst ✋🔥",
+            "anonym": ", jemand wünscht sich, dass du seine Haut überall spürst ✋🔥",
+            "text": ", {userName} wünscht sich, dass du seine Haut überall spürst ✋🔥",
             "name": "Touch ✋🔥"
         }
     },

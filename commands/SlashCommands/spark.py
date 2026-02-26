@@ -40,6 +40,9 @@ class Spark(commands.Cog):
             return
 
         Sparktyp = getSparkIntensity(connection, targetID) #für später wichtig im Modal, um abzufragen welche Sparks angezeigt werden sollen
+        if Sparktyp == "Keine":
+            await interaction.response.send_message(translate(interaction.locale, "command.sparknsfw.sparkDeactive"), ephemeral=True)
+            return
         AnonymSettings = getServerAnonymSpark(connection, serverID)
         await interaction.response.send_modal(SparkModal(target, interaction.locale, Sparktyp, AnonymSettings))
 

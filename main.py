@@ -102,7 +102,6 @@ async def loadCommands():
     await bot.load_extension("commands.PrefixCommands.settings")
     await bot.load_extension("commands.SlashCommands.settings")
     await bot.load_extension("commands.SlashCommands.spark")
-    await bot.load_extension("commands.Test")
     await bot.load_extension("commands.PrefixCommands.adminCommands")
     await bot.load_extension("commands.PrefixCommands.kuroCommands")
     await bot.load_extension("commands.SlashCommands.help")
@@ -111,7 +110,7 @@ async def loadCommands():
     await bot.load_extension("commands.SlashCommands.use")
     await bot.load_extension("commands.SlashCommands.shop")
     await bot.load_extension("commands.SlashCommands.feedback")
-    #await bot.load_extension("commands.SlashCommands.vote")
+    await bot.load_extension("functions.daily")
 
 
 

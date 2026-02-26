@@ -36,7 +36,7 @@ class newSettings(discord.ui.View):
         self.streakPrivate = self.format_privacy(getStreakPrivate(connection, userID), locale=self.locale)
         #self.statsPrivate = self.format_privacy(getStatsPrivate(connection, userID), locale=self.locale)
         #self.profilPrivate = self.format_privacy(getProfilPrivateSetting(connection, userID), locale=self.locale)
-        self.newsletter = self.format_toggle(getNewsletter(connection, userID), locale=self.locale)
+        #self.newsletter = self.format_toggle(getNewsletter(connection, userID), locale=self.locale)
         self.sparkDM = self.format_toggle(getSparkDM(connection, userID), locale=self.locale)
         self.Ping = self.format_toggle(getPingSetting(connection, userID), locale=self.locale)
         #self.customSpark = self.format_toggle(getCustomSparkSetting(connection, userID), locale=self.locale)
@@ -60,13 +60,13 @@ class newSettings(discord.ui.View):
             inline=False
         )
 
-        embed.add_field(
-            name=f"{translate(self.locale, 'embed.settings.premium')}",
-            value=f">>> `Newsletter` → {self.newsletter}\n",
+        #embed.add_field(
+        #    name=f"{translate(self.locale, 'embed.settings.premium')}",
+        #    value=f">>> `Newsletter` → {self.newsletter}\n",
                   #f"`Stats` → {self.statsPrivate}\n"
                   #f"`Custom Sparks` → {self.customSpark}",
-            inline=False
-        )
+        #    inline=False
+        #)
         return embed
 
     # Premium-Embed (Platzhalter)
@@ -182,6 +182,7 @@ class Settings(commands.Cog):
     @app_commands.command(name="settings", description="Change your Settings (like which sparks you can get)")
     async def settings(self, interaction: discord.Interaction):
         await interaction.response.defer(ephemeral=True)
+        CheckUserIsInSettings(str(interaction.user.id))
         userID = str(interaction.user.id)
         premium = getPremium(connection, userID)
         locale = interaction.locale
@@ -209,6 +210,7 @@ class SparkIntensityModal(discord.ui.Modal):
         self.select = discord.ui.Select(
             placeholder=translate(locale, "modal.sparkIntensity.placeholder"),
             options=[
+                discord.SelectOption(label=translate(locale, "modal.sparkIntensity.options.noName"), value="Keine", description=translate(locale, "modal.sparkIntensity.options.noDesc"), emoji="⛔"),
                 discord.SelectOption(label="Soft", value="Soft", description=translate(locale, "modal.sparkIntensity.options.softDesc"), emoji="🔞"),
                 discord.SelectOption(label="Spicy", value="Spicy", description=translate(locale, "modal.sparkIntensity.options.spicyDesc"), emoji="🔞"),
                 discord.SelectOption(label="Explicit", value="Explicit", description=translate(locale, "modal.sparkIntensity.options.explicitDesc"), emoji="🔞"),
