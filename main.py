@@ -121,6 +121,7 @@ async def loadCommands():
     await bot.load_extension("commands.SlashCommands.shop")
     await bot.load_extension("commands.SlashCommands.feedback")
     await bot.load_extension("functions.daily")
+    await bot.load_extension("commands.SlashCommands.profil")
 
 
 

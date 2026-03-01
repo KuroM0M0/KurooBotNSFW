@@ -1026,7 +1026,7 @@ def getProfilPrivateSetting(connection, userID):
     if connection is not None:
         cursor = connection.cursor()
         try:
-            cursor.execute('''  SELECT ProfilePrivate
+            cursor.execute('''  SELECT StreakPrivate
                                 FROM Settings
                                 WHERE UserID = ?''',
                                 (userID,))
@@ -1047,7 +1047,7 @@ def setProfilPrivateSetting(connection, userID, an): #an = true/false
         cursor = connection.cursor()
         try:
             cursor.execute('''  UPDATE Settings
-                                SET ProfilePrivate = ?
+                                SET StreakPrivate = ?
                                 WHERE UserID = ?''',
                                 (an, userID))
             connection.commit()

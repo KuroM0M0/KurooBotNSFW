@@ -33,9 +33,9 @@ class newSettings(discord.ui.View):
 
     # ---- Daten laden (normal) ----
     def settingStuff(self, userID):
-        self.streakPrivate = self.format_privacy(getStreakPrivate(connection, userID), locale=self.locale)
+        #self.streakPrivate = self.format_privacy(getStreakPrivate(connection, userID), locale=self.locale)
         #self.statsPrivate = self.format_privacy(getStatsPrivate(connection, userID), locale=self.locale)
-        #self.profilPrivate = self.format_privacy(getProfilPrivateSetting(connection, userID), locale=self.locale)
+        self.profilPrivate = self.format_privacy(getProfilPrivateSetting(connection, userID), locale=self.locale)
         #self.newsletter = self.format_toggle(getNewsletter(connection, userID), locale=self.locale)
         self.sparkDM = self.format_toggle(getSparkDM(connection, userID), locale=self.locale)
         self.Ping = self.format_toggle(getPingSetting(connection, userID), locale=self.locale)
@@ -47,7 +47,7 @@ class newSettings(discord.ui.View):
 
         embed.add_field(
             name=f"{translate(self.locale, 'embed.settings.privacy')}",
-            value=f">>> `Streak` → {self.streakPrivate}\n",
+            value=f">>> `Profil` → {self.profilPrivate}\n",
                   #f"`Profil` → {self.profilPrivate}",
             inline=False
         )
@@ -103,8 +103,8 @@ class SettingSelect(discord.ui.Select):
         self.userID = userID
         self.hatPremium = hatPremium
         options = [
-                discord.SelectOption(label="Streak", description="Stelle ein, ob deine Streak Privat oder Öffentlich angezeigt werden soll", value="streak", emoji="<:Streakpunkt:1406583255934963823>")
-                #discord.SelectOption(label="Profil", description="Stelle ein, ob dein Profil Privat oder Öffentlich angezeigt werden soll", value="profil", emoji="👤")
+                #discord.SelectOption(label="Streak", description="Stelle ein, ob deine Streak Privat oder Öffentlich angezeigt werden soll", value="streak", emoji="<:Streakpunkt:1406583255934963823>")
+                discord.SelectOption(label="Profil", description="Stelle ein, ob dein Profil Privat oder Öffentlich angezeigt werden soll", value="profil", emoji="👤")
             ]
         
         if hatPremium:
