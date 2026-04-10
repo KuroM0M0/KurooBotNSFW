@@ -32,10 +32,17 @@ class Profil(commands.Cog):
         #embed.add_field(name="\u200b", value="\u200b", inline=False) #leerzeile
         #embed.add_field(name="gesparkt", value=sparkCount, inline=True)
         #embed.add_field(name="gesparkt von dir", value=sparkReceived, inline=True)
-        embed.set_thumbnail(url=interaction.user.display_avatar.url)
+        embed.set_thumbnail(url=user.display_avatar.url)
         embed.set_footer(text="3 Tage Streak = 1 Punkt", icon_url="https://discord.com/channels/475295112453423125/1354078227903283251/1477768167379042324")
 
-        await interaction.followup.send(embed=embed)
+        if privacy == True:
+            if userID != interaction.user.id:
+                await interaction.followup.send("Diese Person hat ihr Profil auf Privat.", ephemeral=True)
+                return
+            else:
+                await interaction.followup.send(embed=embed, ephemeral=True)
+        else:
+            await interaction.followup.send(embed=embed)
 
 
 async def setup(bot: commands.Bot):

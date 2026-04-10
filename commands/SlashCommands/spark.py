@@ -119,6 +119,7 @@ class SparkModal(discord.ui.Modal):
         targetID = target.id
         kompliment = self.select.values[0]
         serverID = interaction.guild_id
+        channel = interaction.channel
         UserExists(str(interaction.user.id))
         removePossibleSpark(interaction.user.id)
         
@@ -145,9 +146,9 @@ class SparkModal(discord.ui.Modal):
         procesStreak(interaction.user.id, connection)
 
         if getPingSetting(connection, targetID):
-            await interaction.followup.send(embed=embed, content=f"{target.mention}")
+            await channel.send(embed=embed, content=f"{target.mention}")
         else:
-            await interaction.followup.send(embed=embed)
+            await channel.send(embed=embed)
 
         if getSparkDM(connection, targetID) == True:
             await asyncio.sleep(2)

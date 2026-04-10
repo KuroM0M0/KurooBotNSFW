@@ -195,6 +195,5 @@ def buildMainEmbed(reveals, revealed, interaction):
         color=0x00ff00
     )"""
 
-# Setup Funktion für das Laden des Cogs
 async def setup(bot):
     await bot.add_cog(RevealCog(bot))
